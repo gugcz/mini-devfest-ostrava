@@ -1,0 +1,18 @@
+{
+  "name": "mini-devfest-ostrava",
+  "version": "1.0.0",
+  "description": "Web page of miniDevFest Ostrava 2019.",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/gugcz/mini-devfest-ostrava.git"
+  },
+  "keywords": [
+    "GDG", "Ostrava", "GUG.cz", "miniDevFest"
+  ],
+  "author": "Václav Pavlíček",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/gugcz/mini-devfest-ostrava/issues"
+  },
+  "homepage": "https://github.com/gugcz/mini-devfest-ostrava#readme"
+}
