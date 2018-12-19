@@ -1,0 +1,7 @@
+@import "@material/typography/mdc-typography";
+@import "./colors.scss";
+
+body {
+    background: $body-background;
+    color: $body-color;
+}
