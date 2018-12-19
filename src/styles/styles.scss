@@ -1,7 +1,54 @@
 @import "@material/typography/mdc-typography";
+@import "@material/button/mdc-button";
 @import "./colors.scss";
 
 body {
     background: $body-background;
     color: $body-color;
+    margin: 0;
+}
+
+.header {
+    display: flex;
+    flex-direction: column;
+    padding: 48px;
+    background: $header-background;
+    min-height: calc(100vh - 96px);
+
+    .place, .date {
+        text-align: right;
+        margin: 4px;
+    }
+
+    .image-container {
+        display: grid;
+        flex: 1;
+        justify-content: center;
+        align-content: center;
+
+        .register-container {
+            display: flex;
+            flex-direction: column;
+            align-content: center;
+            justify-content: center;
+            align-items: center;
+            justify-items: center;
+
+            .register-button {
+                @include mdc-button-shape-radius(24px);
+                @include mdc-button-container-fill-color(#FFFF00);
+                
+                margin: 20px 0 32px 0;
+                color: black;
+                font-size: 20px;
+                height: 44px;
+            }
+
+            .info-text {
+                margin: 0;
+                text-align: center;
+                width: 1000px;
+            }
+        }
+    }
 }

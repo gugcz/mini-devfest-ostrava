@@ -1,4 +1,4 @@
-# miniDevFestOstrava 2019
+# miniDevFest Ostrava 2019
 The official website of miniDevFest Ostrava 2019
 
 ## Requirements

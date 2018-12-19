@@ -1,3 +1,4 @@
 import './styles/styles.scss';
+import {MDCRipple} from '@material/ripple';
 
-console.log('webpack starterkit');
+const buttonRipple = new MDCRipple(document.querySelector('.mdc-button'));
