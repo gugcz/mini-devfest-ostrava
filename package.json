@@ -2,17 +2,33 @@
   "name": "mini-devfest-ostrava",
   "version": "1.0.0",
   "description": "Web page of miniDevFest Ostrava 2019.",
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/gugcz/mini-devfest-ostrava.git"
+  "repository": "git+https://github.com/gugcz/mini-devfest-ostrava.git",
+  "scripts": {
+    "build": "webpack --config webpack.config.js"
   },
   "keywords": [
-    "GDG", "Ostrava", "GUG.cz", "miniDevFest"
+    "GDG",
+    "Ostrava",
+    "GUG.cz",
+    "miniDevFest"
   ],
   "author": "Václav Pavlíček",
   "license": "MIT",
   "bugs": {
     "url": "https://github.com/gugcz/mini-devfest-ostrava/issues"
   },
-  "homepage": "https://github.com/gugcz/mini-devfest-ostrava#readme"
+  "homepage": "https://github.com/gugcz/mini-devfest-ostrava#readme",
+  "devDependencies": {
+    "clean-webpack-plugin": "^1.0.0",
+    "css-loader": "^2.0.1",
+    "html-webpack-plugin": "^3.2.0",
+    "node-sass": "^4.11.0",
+    "sass-loader": "^7.1.0",
+    "style-loader": "^0.23.1",
+    "webpack": "^4.27.1",
+    "webpack-cli": "^3.1.2"
+  },
+  "dependencies": {
+    "@material/typography": "^0.42.0"
+  }
 }
