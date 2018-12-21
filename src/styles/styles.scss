@@ -13,7 +13,6 @@ body {
     display: flex;
     flex-direction: column;
     padding: $mobile-header-padding;
-    background: $header-background;
     min-height: calc(100vh - 48px);
 
     .place, .date {
@@ -85,6 +84,24 @@ body {
                 }
             }
         }
+    }
+}
+
+.footer {
+    display: grid;
+    justify-content: center;
+    align-content: center;
+    padding: $mobile-footer-padding;
+
+    .organizer-title {
+        margin: 16px;
+        font-size: $mobile-organizer-font-size;
+        text-align: center;
+    }
+
+    .organizer-logo {
+        width: 100%;
+        max-width: 360px;
     }
 }
 
