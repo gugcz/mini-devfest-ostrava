@@ -18,6 +18,18 @@ body {
 
     .place, .date {
         text-align: right;
+        line-height: unset;
+    }
+    
+    .date {
+        font-size: $mobile-date-font-size;
+        margin: 0;
+    }
+
+    .place {
+        font-size: $mobile-place-font-size;
+        line-height: unset;
+        margin: 10px 0;
     }
 
     .content {
@@ -76,31 +88,46 @@ body {
     }
 }
 
-@media screen and (max-width: 425px) {
+@media screen and (min-width: 425px) {
     .header {
-        .date {
-            font-size: $mobile-date-font-size;
-            line-height: unset;
-            margin: 0;
-        }
+        min-height: calc(100vh - 72px);
+        padding: $tablet-header-padding;
 
-        .place {
-            font-size: $mobile-place-font-size;
-            line-height: unset;
-            margin: 10px 0;
+        .place, .date {
+            margin: 4px;
+        }
+        
+        .content .register-container {
+            .register-button {
+                @include mdc-button-shape-radius(38px);
+                padding: 0 24px;
+                font-size: 24px;
+                height: 60px;
+            }
+
+            .info-text {
+                font-size: 1.75rem;
+            }
         }
     }
 }
 
-@media screen and (min-width: 1024px) {
-    .place, .date {
-        margin: 4px;
-    }
+@media screen and (min-width: 768px) {
+    .header {
+        .place, .date {
+            margin: 4px;
+        }
 
+        .content {
+            .image-container .main-logo {
+                max-width: 1200px;
+            }
 
-    .info-text {
-        margin: 0;
-        text-align: center;
-        width: 1000px;
+            .register-container .info-text {
+                margin: 0;
+                text-align: center;
+                max-width: 1200px;
+            }
+        }
     }
 }
