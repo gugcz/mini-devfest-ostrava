@@ -58,10 +58,11 @@ body {
 
             .register-button {
                 @include mdc-button-shape-radius(24px);
-                @include mdc-button-container-fill-color(#FFFF00);
+                @include mdc-button-container-fill-color($buttons-color);
+                @include mdc-button-outline-color(white);
                 
                 margin: 0 0 20px 0;
-                color: black;
+                color: white;
                 font-size: 18px;
                 height: 42px;
             }
@@ -89,11 +90,13 @@ body {
 
 .footer {
     display: grid;
+    background: $footer-background;
     justify-content: center;
     align-content: center;
     padding: $mobile-footer-padding;
 
     .organizer-title {
+        color: $partners-titles-color;
         margin: 16px;
         font-size: $mobile-organizer-font-size;
         text-align: center;
@@ -127,6 +130,10 @@ body {
             }
         }
     }
+
+    .footer .organizer-title {
+        font-size: $tablet-organizer-font-size;
+    }
 }
 
 @media screen and (min-width: 768px) {
@@ -146,5 +153,9 @@ body {
                 max-width: 1200px;
             }
         }
+    }
+
+    .footer .organizer-title {
+        font-size: $desktop-organizer-font-size;
     }
 }
