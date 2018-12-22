@@ -15,15 +15,17 @@
     .speakers-container {
         display: grid;
         grid-gap: 16px;
-        grid-template-columns: 1fr;
+        grid-template-columns: $speaker-card-width;
         margin-top: 32px;
+        justify-content: center;
+        grid-column-gap: 16px;
 
         .speaker {
             display: grid;
             justify-items: center;
             border-radius: 24px 8px;
             padding: 16px;
-            width: 256px;
+            width: $speaker-card-width;
             box-shadow: 0 2px 1px -1px rgba(0,0,0,.2), 0 1px 1px 0 rgba(0,0,0,.14), 0 1px 3px 0 rgba(0,0,0,.12);
 
             &-photo {
@@ -46,5 +48,29 @@
                 height: 36px;
             }
         }
+    }
+}
+
+@media screen and (min-width: 600px) {
+    .speakers-section .speakers-container {
+        grid-template-columns: repeat(2, $speaker-card-width);
+    }
+}
+
+@media screen and (min-width: 832px) {
+    .speakers-section .speakers-container {
+        grid-template-columns: repeat(3, $speaker-card-width);
+    }
+}
+
+@media screen and (min-width: 1104px) {
+    .speakers-section .speakers-container {
+        grid-template-columns: repeat(4, $speaker-card-width);
+    }
+}
+
+@media screen and (min-width: 1376px) {
+    .speakers-section .speakers-container {
+        grid-template-columns: repeat(5, $speaker-card-width);
     }
 }

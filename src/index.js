@@ -1,6 +1,5 @@
 import './styles/styles.scss';
 import {MDCRipple} from '@material/ripple';
 
-const selectors = ['.mdc-card__primary-action', '.button', '.mdc-card__primary-action'];
-
-selectors.forEach(it => new MDCRipple(document.querySelector(it)));
+const selector = '.mdc-card__primary-action, .button, .mdc-card__primary-action';
+const ripples = [].map.call(document.querySelectorAll(selector), el => new MDCRipple(el));
