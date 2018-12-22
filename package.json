@@ -34,6 +34,7 @@
     "webpack-merge": "^4.1.5"
   },
   "dependencies": {
+    "@material/card": "^0.42.0",
     "@material/typography": "^0.42.0"
   }
 }
