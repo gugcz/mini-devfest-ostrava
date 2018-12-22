@@ -1,0 +1,45 @@
+@import "./colors.scss";
+
+.speakers-section {
+    background: $secondary-background-color;
+    color: $secondary-text-color;
+    padding: $mobile-speakers-section-padding;
+
+    .speakers-title {
+        text-align: center;
+        margin: 0;
+        font-size: $mobile-speakers-title-font-size;
+    }
+
+    .speakers-container {
+        display: grid;
+        grid-gap: 16px;
+        grid-template-columns: 1fr;
+        margin-top: 32px;
+
+        .speaker {
+            display: grid;
+            justify-items: center;
+            
+            &-photo {
+                width: 256px;
+                border-radius: 50%;
+            }
+
+            &-name {
+                text-align: center;
+                margin: 16px 0 12px 0;
+                font-size: $mobile-speaker-name-font-size;
+            }
+
+            &-position {
+                margin: 0 0 12px 0;
+                font-size: $mobile-speaker-position-font-size;
+            }
+
+            &-company {
+                height: 36px;
+            }
+        }
+    }
+}
