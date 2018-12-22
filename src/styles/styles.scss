@@ -2,6 +2,7 @@
 @import "@material/button/mdc-button";
 @import "./colors.scss";
 @import "./variables.scss";
+@import "./buttons.scss";
 
 body {
     background: $body-background;
@@ -57,14 +58,7 @@ body {
             align-items: center;
 
             .register-button {
-                @include mdc-button-shape-radius(24px);
-                @include mdc-button-container-fill-color($buttons-color);
-                @include mdc-button-outline-color(white);
-                
                 margin: 0 0 20px 0;
-                color: white;
-                font-size: 18px;
-                height: 42px;
             }
 
             .info-text {
@@ -75,11 +69,6 @@ body {
             }
 
             @media screen and (min-width: 400px) {
-                .register-button {
-                    font-size: 20px;
-                    height: 44px;
-                }
-
                 .info-text {
                     font-size: 18px;
                 }
@@ -94,17 +83,49 @@ body {
     justify-content: center;
     align-content: center;
     padding: $mobile-footer-padding;
+    color: $dark-text-color;
 
-    .organizer-title {
-        color: $partners-titles-color;
-        margin: 16px;
-        font-size: $mobile-organizer-font-size;
-        text-align: center;
+    .organizer-container {
+        display: grid;
+        justify-content: center;
+
+        .organizer-title {
+            margin: 16px;
+            font-size: $mobile-organizer-font-size;
+            text-align: center;
+        }
+    
+        .organizer-logo {
+            width: 100%;
+            max-width: 360px;
+        }
     }
 
-    .organizer-logo {
-        width: 100%;
-        max-width: 360px;
+    .contact-container {
+        display: grid;
+        grid-template-columns: 1fr;
+        grid-gap: 16px;
+        padding-top: 32px;
+
+        .buttons-container {
+            display: grid;
+            grid-template-columns: 1fr;
+            grid-gap: 16px;
+
+            .button {
+                max-width: 360px;
+            }
+        }
+
+        .contact {
+            margin: 0;
+            text-align: center;
+
+            .link {
+                color: $dark-text-color;
+                text-decoration: underline;
+            }
+        }
     }
 }
 
@@ -155,7 +176,13 @@ body {
         }
     }
 
-    .footer .organizer-title {
-        font-size: $desktop-organizer-font-size;
+    .footer {
+        .organizer-title {
+            font-size: $desktop-organizer-font-size;
+        }
+
+        .contact-container .buttons-container {
+            grid-template-columns: 1fr 1fr;
+        }
     }
 }
