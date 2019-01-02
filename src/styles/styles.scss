@@ -10,61 +10,68 @@ body {
 }
 
 .header {
-    display: flex;
-    flex-direction: column;
-    padding: $mobile-header-padding;
-    min-height: calc(100vh - 48px);
+    background-image: url(../images/ostrava.jpg);
+    background-position: center center;
+    background-repeat: no-repeat;
 
-    &-title {
-        display: grid;
-        grid-template-columns: 120px 1fr;
-        grid-column-gap: 8px;
-        width: 100%;
-
-        .header-logo-container .main-logo {
+    &-container {
+        display: flex;
+        flex-direction: column;
+        padding: $mobile-header-padding;
+        min-height: calc(100vh - 48px);
+        background-color: rgba($color: #000000, $alpha: 0.4);
+    
+        .header-title {
+            display: grid;
+            grid-template-columns: 120px 1fr;
+            grid-column-gap: 8px;
             width: 100%;
-        }
-
-        .header-title-headings {
-            .place, .date {
-                text-align: right;
-                line-height: unset;
+    
+            .header-logo-container .main-logo {
+                width: 100%;
             }
     
-            .date {
-                font-size: $mobile-date-font-size;
-                margin: 0;
-            }
+            .header-title-headings {
+                .place, .date {
+                    text-align: right;
+                    line-height: unset;
+                }
         
-            .place {
-                font-size: $mobile-place-font-size;
-                line-height: unset;
-                margin: 4px 0 0 0;
+                .date {
+                    font-size: $mobile-date-font-size;
+                    margin: 0;
+                }
+            
+                .place {
+                    font-size: $mobile-place-font-size;
+                    line-height: unset;
+                    margin: 4px 0 0 0;
+                }
             }
         }
-    }
-
-    &-content {
-        display: grid;
-        flex: 1;
-        justify-content: center;
-        align-content: flex-end;
-
-        .register-container {
-            display: flex;
-            flex-direction: column;
+    
+        .header-content {
+            display: grid;
+            flex: 1;
             justify-content: center;
-            align-items: center;
-
-            .register-button {
-                margin: 0 0 20px 0;
-            }
-
-            .info-text {
-                margin: 0;
-                font-size: 14px;
-                line-height: unset;
-                text-align: center;
+            align-content: flex-end;
+    
+            .register-container {
+                display: flex;
+                flex-direction: column;
+                justify-content: center;
+                align-items: center;
+    
+                .register-button {
+                    margin: 0 0 20px 0;
+                }
+    
+                .info-text {
+                    margin: 0;
+                    font-size: 14px;
+                    line-height: unset;
+                    text-align: center;
+                }
             }
         }
     }
@@ -123,15 +130,15 @@ body {
 }
 
 @media screen and (min-width: 425px) {
-    .header {
+    .header .header-container {
         min-height: calc(100vh - 72px);
         padding: $tablet-header-padding;
 
-        &-title {
+        .header-title {
             grid-template-columns: 180px 1fr;
         }
 
-        &-content .register-container .info-text {
+        .header-content .register-container .info-text {
             font-size: 18px;
         }
     }
@@ -142,11 +149,11 @@ body {
 }
 
 @media screen and (min-width: 768px) {
-    .header {
+    .header .header-container {
         min-height: calc(100vh - 100px);
         padding-bottom: $tablet-header-bottom-padding;
 
-        &-title {
+        .header-title {
             grid-template-columns: 250px 1fr;
     
             .header-title-headings {
@@ -174,8 +181,8 @@ body {
 }
 
 @media screen and (min-width: 1024px) {
-    .header {
-        &-title {
+    .header .header-container {
+        .header-title {
             grid-template-columns: 300px 1fr;
     
             .header-title-headings {
