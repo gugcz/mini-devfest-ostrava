@@ -13,9 +13,8 @@
     }
 }
 
-.secondary-button {
+.button.secondary-button {
     @include mdc-button-container-fill-color($secondary-button-color);
-    @include mdc-button-outline-color($secondary-button-text-color);
 
     .mdc-button__label {
         color: $secondary-button-text-color;
