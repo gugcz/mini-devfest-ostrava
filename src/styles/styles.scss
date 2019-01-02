@@ -15,20 +15,33 @@ body {
     padding: $mobile-header-padding;
     min-height: calc(100vh - 48px);
 
-    .place, .date {
-        text-align: right;
-        line-height: unset;
-    }
-    
-    .date {
-        font-size: $mobile-date-font-size;
-        margin: 0;
-    }
+    &-title {
+        display: grid;
+        grid-template-columns: 180px 1fr;
+        grid-column-gap: 16px;
+        width: 100%;
 
-    .place {
-        font-size: $mobile-place-font-size;
-        line-height: unset;
-        margin: 10px 0;
+        .header-logo-container .main-logo {
+            width: 100%;
+        }
+
+        .header-title-headings {
+            .place, .date {
+                text-align: right;
+                line-height: unset;
+            }
+    
+            .date {
+                font-size: $mobile-date-font-size;
+                margin: 0;
+            }
+        
+            .place {
+                font-size: $mobile-place-font-size;
+                line-height: unset;
+                margin: 4px 0 0 0;
+            }
+        }
     }
 
     .content {
@@ -133,10 +146,6 @@ body {
         min-height: calc(100vh - 72px);
         padding: $tablet-header-padding;
 
-        .place, .date {
-            margin: 4px;
-        }
-        
         .content .register-container {
             .register-button {
                 @include mdc-button-shape-radius(38px);
@@ -158,8 +167,19 @@ body {
 
 @media screen and (min-width: 768px) {
     .header {
-        .place, .date {
-            margin: 4px;
+        &-title {
+            grid-template-columns: 250px 1fr;
+    
+            .header-title-headings {
+                .date {
+                    font-size: $tablet-date-font-size;
+                }
+            
+                .place {
+                    font-size: $tablet-place-font-size;
+                    margin-top: 8px;
+                }
+            }
         }
 
         .content {
@@ -182,6 +202,25 @@ body {
 
         .contact-container .buttons-container {
             grid-template-columns: 1fr 1fr;
+        }
+    }
+}
+
+@media screen and (min-width: 1024px) {
+    .header {
+        &-title {
+            grid-template-columns: 300px 1fr;
+    
+            .header-title-headings {
+                .date {
+                    font-size: $desktop-date-font-size;
+                }
+            
+                .place {
+                    font-size: $desktop-place-font-size;
+                    margin-top: 12px;
+                }
+            }
         }
     }
 }
