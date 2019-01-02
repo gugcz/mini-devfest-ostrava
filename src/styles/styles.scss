@@ -10,66 +10,67 @@ body {
 }
 
 .header {
-    display: flex;
-    flex-direction: column;
-    padding: $mobile-header-padding;
-    min-height: calc(100vh - 48px);
+    background-image: url(../images/ostrava.jpg);
+    background-position: center center;
+    background-repeat: no-repeat;
 
-    .place, .date {
-        text-align: right;
-        line-height: unset;
-    }
+    &-container {
+        display: flex;
+        flex-direction: column;
+        padding: $mobile-header-padding;
+        min-height: calc(100vh - 48px);
+        background-color: rgba($color: #000000, $alpha: 0.4);
     
-    .date {
-        font-size: $mobile-date-font-size;
-        margin: 0;
-    }
-
-    .place {
-        font-size: $mobile-place-font-size;
-        line-height: unset;
-        margin: 10px 0;
-    }
-
-    .content {
-        display: grid;
-        flex: 1;
-        justify-content: center;
-        align-content: center;
-        grid-template-rows: 50% 1fr;
-
-        .image-container {
-            height: 100%;
+        .header-title {
             display: grid;
-            justify-items: center;
-            align-items: center;
-
-            .main-logo {
-                margin: 32px 0;
+            grid-template-columns: 120px 1fr;
+            grid-column-gap: 8px;
+            width: 100%;
+    
+            .header-logo-container .main-logo {
                 width: 100%;
             }
+    
+            .header-title-headings {
+                .place, .date {
+                    text-align: right;
+                    line-height: unset;
+                }
+        
+                .date {
+                    font-size: $mobile-date-font-size;
+                    margin: 0;
+                }
+            
+                .place {
+                    font-size: $mobile-place-font-size;
+                    line-height: unset;
+                    margin: 4px 0 0 0;
+                }
+            }
         }
-
-        .register-container {
-            display: flex;
-            flex-direction: column;
+    
+        .header-content {
+            display: grid;
+            flex: 1;
             justify-content: center;
-            align-items: center;
-
-            .register-button {
-                margin: 0 0 20px 0;
-            }
-
-            .info-text {
-                margin: 0;
-                font-size: 14px;
-                line-height: unset;
-                text-align: center;
-            }
-
-            @media screen and (min-width: 400px) {
+            align-content: flex-end;
+    
+            .register-container {
+                display: flex;
+                flex-direction: column;
+                justify-content: center;
+                align-items: center;
+    
+                .register-button {
+                    margin: 0 0 20px 0;
+                }
+    
                 .info-text {
-                    font-size: 18px;
+                    margin: 0;
+                    font-size: 14px;
+                    line-height: unset;
+                    text-align: center;
                 }
             }
         }
@@ -129,25 +130,16 @@ body {
 }
 
 @media screen and (min-width: 425px) {
-    .header {
+    .header .header-container {
         min-height: calc(100vh - 72px);
         padding: $tablet-header-padding;
 
-        .place, .date {
-            margin: 4px;
+        .header-title {
+            grid-template-columns: 180px 1fr;
         }
-        
-        .content .register-container {
-            .register-button {
-                @include mdc-button-shape-radius(38px);
-                padding: 0 24px;
-                font-size: 24px;
-                height: 60px;
-            }
 
-            .info-text {
-                font-size: 1.75rem;
-            }
+        .header-content .register-container .info-text {
+            font-size: 18px;
         }
     }
 
@@ -157,20 +149,22 @@ body {
 }
 
 @media screen and (min-width: 768px) {
-    .header {
-        .place, .date {
-            margin: 4px;
-        }
+    .header .header-container {
+        min-height: calc(100vh - 100px);
+        padding-bottom: $tablet-header-bottom-padding;
 
-        .content {
-            .image-container .main-logo {
-                max-width: 1200px;
-            }
-
-            .register-container .info-text {
-                margin: 0;
-                text-align: center;
-                max-width: 1200px;
+        .header-title {
+            grid-template-columns: 250px 1fr;
+    
+            .header-title-headings {
+                .date {
+                    font-size: $tablet-date-font-size;
+                }
+            
+                .place {
+                    font-size: $tablet-place-font-size;
+                    margin-top: 8px;
+                }
             }
         }
     }
@@ -182,6 +176,25 @@ body {
 
         .contact-container .buttons-container {
             grid-template-columns: 1fr 1fr;
+        }
+    }
+}
+
+@media screen and (min-width: 1024px) {
+    .header .header-container {
+        .header-title {
+            grid-template-columns: 300px 1fr;
+    
+            .header-title-headings {
+                .date {
+                    font-size: $desktop-date-font-size;
+                }
+            
+                .place {
+                    font-size: $desktop-place-font-size;
+                    margin-top: 12px;
+                }
+            }
         }
     }
 }
