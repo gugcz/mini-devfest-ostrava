@@ -3,6 +3,7 @@
 @import "./variables.scss";
 @import "./buttons.scss";
 @import "./speakers.scss";
+@import "./schedule.scss";
 
 body {
     background: $body-background;
@@ -78,9 +79,16 @@ body {
     }
 }
 
+.section .section-title {
+    text-align: center;
+    margin: 0;
+    font-size: $mobile-section-title-font-size;
+    color: $black-text-color;
+}
+
+
 .footer {
     display: grid;
-    background: $footer-background;
     justify-content: center;
     align-content: center;
     padding: $mobile-footer-padding;

@@ -2,15 +2,10 @@
 @import "./colors.scss";
 
 .speakers-section {
-    background: $secondary-background-color;
-    color: $secondary-text-color;
+    background: $body-background;
+    color: $black-text-color;
     padding: $mobile-speakers-section-padding;
-
-    .speakers-title {
-        text-align: center;
-        margin: 0;
-        font-size: $mobile-speakers-title-font-size;
-    }
+    min-height: calc(100vh - 64px);
 
     .speakers-container {
         display: grid;
@@ -66,11 +61,5 @@
 @media screen and (min-width: 1104px) {
     .speakers-section .speakers-container {
         grid-template-columns: repeat(4, $speaker-card-width);
-    }
-}
-
-@media screen and (min-width: 1376px) {
-    .speakers-section .speakers-container {
-        grid-template-columns: repeat(5, $speaker-card-width);
     }
 }
