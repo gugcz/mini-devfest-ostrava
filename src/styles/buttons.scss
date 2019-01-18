@@ -17,7 +17,7 @@
     @include mdc-button-container-fill-color($secondary-button-color);
 
     .mdc-button__label {
-        color: $secondary-text-color;
+        color: $secondary-button-text-color;
     }
 }
 
