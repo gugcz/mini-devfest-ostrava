@@ -3,15 +3,9 @@
 
 .speakers-section {
     background: $body-background;
-    color: $secondary-button-text-color;
+    color: $black-text-color;
     padding: $mobile-speakers-section-padding;
     min-height: calc(100vh - 64px);
-
-    .speakers-title {
-        text-align: center;
-        margin: 0;
-        font-size: $mobile-speakers-title-font-size;
-    }
 
     .speakers-container {
         display: grid;

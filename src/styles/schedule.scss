@@ -1,0 +1,116 @@
+@import "@material/card/mdc-card";
+@import "./colors.scss";
+@import "./variables.scss";
+@import "./topics.scss";
+
+.schedule-section {
+    display: grid;
+    justify-content: center;
+    color: $black-text-color;
+
+    .schedule-container {
+        display: grid;
+        grid-template-columns: 100px 1fr;
+        margin-top: 32px;
+        width: 1072px;
+
+        .talks-container {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            grid-column-gap: 16px;
+            grid-gap: 16px;
+    
+            .talk {
+                box-shadow: 0 2px 1px -1px rgba(0,0,0,.2), 0 1px 1px 0 rgba(0,0,0,.14), 0 1px 3px 0 rgba(0,0,0,.12);
+                border-radius: 24px 8px;
+                padding: 16px;
+    
+                &-name {
+                    font-size: 1.25rem;
+                    margin: 0 0 4px 0;
+                }
+    
+                .topics-container {
+                    display: flex;
+                    flex-direction: row;
+                    height: 16px;
+                    margin: 4px 0;
+    
+                    .topic {
+                        display: flex;
+                        align-items: center;
+                        flex-direction: row;
+                        margin-left: 10px;
+    
+                        &-dot {
+                            border-radius: 6px;
+                            width: 10px;
+                            height: 10px;
+                            margin-right: 4px;
+                            margin-bottom: 1px;
+                        }
+    
+                        &-name {
+                            margin: 0;
+                        }
+                    }
+    
+                    .topic:first-child {
+                        margin-left: 0;
+                    }
+                }
+    
+                .description .description-text {
+                    margin: 4px 0 8px;
+                }
+    
+                .speaker-container {
+                    display: flex;
+                    flex-direction: row;
+    
+                    .speaker-photo {
+                        height: 48px;
+                        border-radius: 50%;
+                    }
+    
+                    .speaker-text {
+                        display: flex;
+                        flex-direction: column;
+                        justify-content: center;
+                        margin-left: 8px;
+    
+                        .name {
+                            font-size: 1.1rem;
+                            margin: 0 0 4px 0;
+                        }
+                        
+                        .position {
+                            margin: 0;
+                            font-size: 0.85rem;
+                        }
+                    }
+                }
+            }
+
+            .full-column {
+                grid-column: 1 / span 2;
+                text-align: center;
+
+                .talk-name {
+                    margin: 0;
+                }
+            }
+        }
+
+        .timer-container {
+            display: grid;
+            grid-template-rows: 1fr 1fr 57px 1fr 1fr;
+            grid-row-gap: 16px;
+
+            .time {
+                margin: 16px 0;
+                font-size: 1.25rem;
+            }
+        }
+    }
+}
