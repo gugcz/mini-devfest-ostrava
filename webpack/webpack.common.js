@@ -19,10 +19,12 @@ module.exports = {
     module: {
         rules: [{
             test: /\.scss$/,
-            use: ["style-loader", "css-loader", {
+            use: ["style-loader", "css-loader", "resolve-url-loader", {
                 loader: "sass-loader",
                 options: {
                     includePaths: ['./node_modules'],
+                    sourceMap: true,
+                    sourceMapContents: false
                 }
             }]
         }]
