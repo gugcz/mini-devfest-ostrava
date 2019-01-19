@@ -7,6 +7,9 @@
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/8.0.0/normalize.min.css">
   <link href="https://fonts.googleapis.com/css?family=Roboto:300,400,500" rel="stylesheet">
   <link rel="shortcut icon" type="image/icon" href="./images/favicon.ico" />
+  <script src="https://www.gstatic.com/firebasejs/5.8.0/firebase.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/5.8.0/firebase-app.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/5.8.0/firebase-firestore.js"></script>
   <title>miniDevFest Ostrava 2019</title>
 </head>
 
@@ -39,55 +42,7 @@
   </header>
   <div class="speakers-section section">
     <h4 class="section-title">Speakers</h4>
-    <div class="speakers-container">
-      <div class="mdc-card mdc-card--outlined speaker mdc-card__primary-action mdc-ripple-upgraded">
-        <img class="speaker-photo" src="./images/speakers/photos/vaclav-pavlicek.jpg" alt="Václav Pavlíček">
-        <h5 class="speaker-name">Václav Pavlíček</h5>
-        <h6 class="speaker-position">Developer, Commity</h6>
-        <img class="speaker-company" src="./images/speakers/companies/Commity.svg" alt="Commity">
-      </div>
-      <div class="mdc-card mdc-card--outlined speaker mdc-card__primary-action mdc-ripple-upgraded">
-        <img class="speaker-photo" src="./images/speakers/photos/vaclav-pavlicek.jpg" alt="Václav Pavlíček">
-        <h5 class="speaker-name">Václav Pavlíček</h5>
-        <h6 class="speaker-position">Developer, Commity</h6>
-        <img class="speaker-company" src="./images/speakers/companies/Commity.svg" alt="Commity">
-      </div>
-      <div class="mdc-card mdc-card--outlined speaker mdc-card__primary-action mdc-ripple-upgraded">
-        <img class="speaker-photo" src="./images/speakers/photos/vaclav-pavlicek.jpg" alt="Václav Pavlíček">
-        <h5 class="speaker-name">Václav Pavlíček</h5>
-        <h6 class="speaker-position">Developer, Commity</h6>
-        <img class="speaker-company" src="./images/speakers/companies/Commity.svg" alt="Commity">
-      </div>
-      <div class="mdc-card mdc-card--outlined speaker mdc-card__primary-action mdc-ripple-upgraded">
-        <img class="speaker-photo" src="./images/speakers/photos/vaclav-pavlicek.jpg" alt="Václav Pavlíček">
-        <h5 class="speaker-name">Václav Pavlíček</h5>
-        <h6 class="speaker-position">Developer, Commity</h6>
-        <img class="speaker-company" src="./images/speakers/companies/Commity.svg" alt="Commity">
-      </div>
-      <div class="mdc-card mdc-card--outlined speaker mdc-card__primary-action mdc-ripple-upgraded">
-        <img class="speaker-photo" src="./images/speakers/photos/vaclav-pavlicek.jpg" alt="Václav Pavlíček">
-        <h5 class="speaker-name">Václav Pavlíček</h5>
-        <h6 class="speaker-position">Developer, Commity</h6>
-        <img class="speaker-company" src="./images/speakers/companies/Commity.svg" alt="Commity">
-      </div>
-      <div class="mdc-card mdc-card--outlined speaker mdc-card__primary-action mdc-ripple-upgraded">
-        <img class="speaker-photo" src="./images/speakers/photos/vaclav-pavlicek.jpg" alt="Václav Pavlíček">
-        <h5 class="speaker-name">Václav Pavlíček</h5>
-        <h6 class="speaker-position">Developer, Commity</h6>
-        <img class="speaker-company" src="./images/speakers/companies/Commity.svg" alt="Commity">
-      </div>
-      <div class="mdc-card mdc-card--outlined speaker mdc-card__primary-action mdc-ripple-upgraded">
-        <img class="speaker-photo" src="./images/speakers/photos/vaclav-pavlicek.jpg" alt="Václav Pavlíček">
-        <h5 class="speaker-name">Václav Pavlíček</h5>
-        <h6 class="speaker-position">Developer, Commity</h6>
-        <img class="speaker-company" src="./images/speakers/companies/Commity.svg" alt="Commity">
-      </div>
-      <div class="mdc-card mdc-card--outlined speaker mdc-card__primary-action mdc-ripple-upgraded">
-        <img class="speaker-photo" src="./images/speakers/photos/vaclav-pavlicek.jpg" alt="Václav Pavlíček">
-        <h5 class="speaker-name">Václav Pavlíček</h5>
-        <h6 class="speaker-position">Developer, Commity</h6>
-        <img class="speaker-company" src="./images/speakers/companies/Commity.svg" alt="Commity">
-      </div>
+    <div class="speakers-container" id="speakers-container">
     </div>
   </div>
   <div class="schedule-section section">
