@@ -1,0 +1,81 @@
+@import "@material/card/mdc-card";
+@import "./colors.scss";
+
+.speakers-section {
+    background: $body-background;
+    color: $black-text-color;
+    padding: $mobile-speakers-section-padding;
+    min-height: calc(100vh - 64px);
+
+    .speakers-container {
+        display: grid;
+        grid-gap: 16px;
+        margin-top: 32px;
+        justify-content: center;
+        grid-column-gap: 16px;
+        grid-template-columns: $speaker-card-width;
+
+        .speaker {
+            display: grid;
+            justify-items: center;
+            border-radius: 24px 8px;
+            padding: 16px;
+            width: $speaker-card-width;
+            box-shadow: 0 2px 1px -1px rgba(0,0,0,.2), 0 1px 1px 0 rgba(0,0,0,.14), 0 1px 3px 0 rgba(0,0,0,.12);
+            height: 420px;
+
+            &-photo {
+                border-radius: 50%;
+                width: 100%;
+            }
+
+            &-name {
+                text-align: center;
+                margin: 16px 0 12px 0;
+                font-size: $mobile-speaker-name-font-size;
+            }
+
+            &-position {
+                margin: 0 0 12px 0;
+                font-size: $mobile-speaker-position-font-size;
+                text-align: center;
+            }
+
+            &-company {
+                height: 36px;
+            }
+        }
+    }
+}
+
+@media screen and (min-width: 600px) {
+    .speakers-section .speakers-container {
+        grid-template-columns: repeat(2, $speaker-card-width);
+    }
+}
+
+@media screen and (min-width: 832px) {
+    .speakers-section .speakers-container {
+        grid-template-columns: 120px 120px 120px 120px 120px 120px;
+
+        .speaker-0 {
+            grid-column: 1/2;
+        }
+
+        .speaker-1 {
+            grid-column: 3/4;
+        }
+
+        .speaker-2 {
+            grid-column: 5/6;
+        }
+
+        .speaker-3 {
+            grid-column: 2/3;
+        }
+
+        .speaker-4 {
+            grid-column: 4/5;
+        }
+    }
+}
