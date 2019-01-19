@@ -27,7 +27,7 @@ function fetchSpeakers() {
             querySnapshot.forEach(doc => {
                 const data = doc.data();
                 const div = document.createElement('div');
-                div.className = 'mdc-card mdc-card--outlined speaker mdc-card__primary-action mdc-ripple-upgraded';
+                div.className = 'mdc-card mdc-card--outlined speaker mdc-card__primary-action mdc-ripple-upgraded speaker-' + data.order;
                 div.innerHTML = `
                     <img class="speaker-photo" src="${data.photoUrl}" alt="${data.name}">
                     <h5 class="speaker-name">${data.name}</h5>
