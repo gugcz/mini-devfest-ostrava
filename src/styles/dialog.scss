@@ -1,5 +1,6 @@
 @import "@material/dialog/mdc-dialog";
 @import "@material/icon-button/mdc-icon-button";
+@import "./topics.scss";
 
 .speaker-dialog .mdc-dialog__container {
     display: grid; 
@@ -13,7 +14,7 @@
         min-height: 100vh;
         max-height: 100vh;
         overflow-y: auto;
-        padding: 0 8px;
+        padding: 0 16px;
         border-radius: 0;
     
         .dialog-header {
@@ -56,6 +57,20 @@
                     text-align: left;
                     justify-content: center;
                     overflow-wrap: break-word;
+                }
+            }
+
+            .talk-container {
+                width: 100%;
+
+                .talk-title {
+                    margin: 0;
+                    font-size: 1.5rem;
+                }
+
+                .talk-level {
+                    margin: 8px 0;
+                    font-size: 1rem;
                 }
             }
         }
