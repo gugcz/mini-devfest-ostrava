@@ -33,6 +33,7 @@ function openDialog(id) {
         const companyLogo = document.getElementById('dialog-speaker-company');
         const photo = document.getElementById('dialog-speaker-photo');
         const about = document.getElementById('dialog-speaker-text-about');
+        const talkContainer = document.getElementById('talk-container');
 
         name.innerText = speaker.name;
         position.innerHTML = speaker.position + (speaker.company ? ', ' + speaker.company : '');
@@ -44,6 +45,19 @@ function openDialog(id) {
             companyLogo.style.display = 'none';
         }
         about.innerText = speaker.about;
+
+        if (!speaker.talk.empty) {
+            talkContainer.style.display = 'block';
+            const talkTitle = document.getElementById('dialog-talk-title');
+            const talkLevel = document.getElementById('dialog-talk-level');
+            const talkIntro = document.getElementById('dialog-talk-intro');
+
+            talkTitle.innerText = speaker.talk.title;
+            talkLevel.innerText = speaker.talk.level;
+            talkIntro.innerText = speaker.talk.intro;
+        } else {
+            talkContainer.style.display = 'none';
+        }
     });
 
     dialog.listen('MDCDialog:closed', () => {
@@ -52,6 +66,9 @@ function openDialog(id) {
         const companyLogo = document.getElementById('dialog-speaker-company');
         const photo = document.getElementById('dialog-speaker-photo');
         const about = document.getElementById('dialog-speaker-text-about');
+        const talkTitle = document.getElementById('dialog-talk-title');
+        const talkLevel = document.getElementById('dialog-talk-level');
+        const talkIntro = document.getElementById('dialog-talk-intro');
 
         name.innerText = '';
         position.innerText = '';
@@ -59,32 +76,39 @@ function openDialog(id) {
         companyLogo.src = '';
         companyLogo.style.display = 'none';
         about.innerText = '';
+        talkTitle.innerHTML = '';
+        talkLevel.innerHTML = '';
+        talkIntro.innerHTML = '';
     });
     dialog.open();
 }
 
+function toDiv(data, doc) {
+    const div = document.createElement('div');
+    div.className = 'mdc-card mdc-card--outlined speaker mdc-card__primary-action mdc-ripple-upgraded speaker-' + data.order;
+    div.onclick = () => openDialog(doc.id);
+    div.innerHTML = `
+            <img class="speaker-photo" src="${data.photoUrl}" alt="${data.name}">
+            <h5 class="speaker-name">${data.name}</h5>
+            ${data.position && !data.company && `<h6 class="speaker-position">${data.position}</h6>` || ''}
+            ${data.position && data.company && `<h6 class="speaker-position">${data.position}, ${data.company}</h6>` || ''}
+            ${data.companyLogo && data.company && `<img class="speaker-company" src="${data.companyLogo}" alt="${data.company}">` || ''}
+            ${!data.companyLogo && `<div class="speaker-company"></div>` || ''}
+        `;
+    return div;
+}
+
 function fetchSpeakers() {
     const speakersContainer = document.getElementById('speakers-container');
-
     db.collection('speakers').orderBy('order')
         .get()
-        .then(querySnapshot =>
-            querySnapshot.forEach(doc => {
-                const data = doc.data();
-                const div = document.createElement('div');
+        .then(querySnapshot => querySnapshot.forEach(doc => {
+            const data = doc.data();
+            data.talkRef.get().then(talk => {
+                data.talk = talk.data();
                 speakers[doc.id] = data;
-                div.className = 'mdc-card mdc-card--outlined speaker mdc-card__primary-action mdc-ripple-upgraded speaker-' + data.order;
-                div.onclick = () => openDialog(doc.id);
-                div.innerHTML = `
-                    <img class="speaker-photo" src="${data.photoUrl}" alt="${data.name}">
-                    <h5 class="speaker-name">${data.name}</h5>
-                    ${data.position && !data.company && `<h6 class="speaker-position">${data.position}</h6>` || ''}
-                    ${data.position && data.company && `<h6 class="speaker-position">${data.position}, ${data.company}</h6>` || ''}
-                    ${data.companyLogo && data.company && `<img class="speaker-company" src="${data.companyLogo}" alt="${data.company}">` || ''}
-                    ${!data.companyLogo && `<div class="speaker-company"></div>` || ''}
-                `;
-                speakersContainer.appendChild(div);
-            })
-        )
+                speakersContainer.appendChild(toDiv(data, doc));
+            }).catch(error => console.log("Error getting documents: ", error));
+        }))
         .catch(error => console.log("Error getting documents: ", error));
 }
