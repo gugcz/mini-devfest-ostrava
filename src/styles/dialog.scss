@@ -6,11 +6,15 @@
     width: 100%;
     
     .mdc-dialog__surface {
+        display: grid;
+        grid-template-columns: 1fr;
         min-width: calc(100vw - 16px);
         max-width: 100vw;
         min-height: 100vh;
-        max-height: unset;
+        max-height: 100vh;
+        overflow-y: auto;
         padding: 0 8px;
+        border-radius: 0;
     
         .dialog-header {
             display: flex;
@@ -47,12 +51,34 @@
                 display: flex;
                 width: 100%;
                 max-width: 100%;
-                height: 100px;
     
                 .text {
                     text-align: left;
                     justify-content: center;
                     overflow-wrap: break-word;
+                }
+            }
+        }
+    }
+}
+
+
+@media screen and (min-width: 400px) {
+    .speaker-dialog .mdc-dialog__container {
+        .mdc-dialog__surface {
+            min-width: 400px;
+            max-width: 400px;
+            min-height: 600px;
+            max-height: unset;
+            height: unset;
+            padding: 4px;
+            border-radius: 4px;
+
+            .dialog-body {
+                padding: 0 16px;
+
+                .speaker-about .text {
+                    text-align: justify;
                 }
             }
         }
@@ -68,6 +94,7 @@
             max-height: unset;
             height: unset;
             padding: 4px;
+            border-radius: 4px;
 
             .dialog-body {
                 padding: 0 16px;
