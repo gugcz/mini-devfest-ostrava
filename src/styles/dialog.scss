@@ -1,0 +1,79 @@
+@import "@material/dialog/mdc-dialog";
+@import "@material/icon-button/mdc-icon-button";
+
+.speaker-dialog .mdc-dialog__container {
+    display: grid; 
+    width: 100%;
+    
+    .mdc-dialog__surface {
+        min-width: calc(100vw - 16px);
+        max-width: 100vw;
+        min-height: 100vh;
+        max-height: unset;
+        padding: 0 8px;
+    
+        .dialog-header {
+            display: flex;
+            justify-content: flex-end;
+        }
+    
+        .dialog-body {
+            display: grid;
+            grid-template-columns: 1fr;
+            align-items: center;
+            justify-items: center;
+    
+            .speaker-photo {
+                height: 200px;
+                width: 200px;
+                border-radius: 50%;
+            }
+    
+            .speaker-name {
+                margin: 16px 0 0 0;
+                font-size: 1.75rem;
+            }
+    
+            .speaker-position {
+                margin: 12px 0;
+                font-size: 1.25rem;
+            }
+    
+            .speaker-company {
+                height: 36px;
+            }
+    
+            .speaker-about {
+                display: flex;
+                width: 100%;
+                max-width: 100%;
+                height: 100px;
+    
+                .text {
+                    text-align: left;
+                    justify-content: center;
+                    overflow-wrap: break-word;
+                }
+            }
+        }
+    }
+}
+
+@media screen and (min-width: 1024px) {
+    .speaker-dialog .mdc-dialog__container {
+        .mdc-dialog__surface {
+            min-width: unset;
+            max-width: 400px;
+            min-height: unset;
+            padding: 4px;
+
+            .dialog-body {
+                padding: 0 16px;
+
+                .speaker-about .text {
+                    text-align: justify;
+                }
+            }
+        }
+    }
+}

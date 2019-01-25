@@ -5,6 +5,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/8.0.0/normalize.min.css">
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
   <link href="https://fonts.googleapis.com/css?family=Roboto:300,400,500" rel="stylesheet">
   <link rel="shortcut icon" type="image/icon" href="./images/favicon.ico" />
   <script src="https://www.gstatic.com/firebasejs/5.8.0/firebase-app.js"></script>
@@ -42,6 +43,31 @@
   <div class="speakers-section section">
     <h4 class="section-title">Speakers</h4>
     <div class="speakers-container" id="speakers-container">
+    </div>
+    <div class="mdc-dialog speaker-dialog" role="alertdialog" aria-modal="true" aria-labelledby="my-dialog-title"
+      aria-describedby="my-dialog-content">
+      <div class="mdc-dialog__container">
+        <div class="mdc-dialog__surface">
+          <div class="dialog-header">
+            <button id="dialog-close-button" class="mdc-icon-button material-icons" data-mdc-dialog-action="no">close</button>
+          </div>
+          <div class="dialog-body">
+            <img class="speaker-photo" src="https://firebasestorage.googleapis.com/v0/b/mini-devfest-ostrava.appspot.com/o/speakers%2Fphotos%2Ftomas_zverina.jpg?alt=media&amp;token=a5069158-6d0b-434c-87d2-2b4ff6e32694"
+              alt="Tomáš Zvěřina">
+            <h5 class="speaker-name">Tomáš Zvěřina</h5>
+            <h6 class="speaker-position">founder, fnx.io</h6>
+            <img class="speaker-company" src="https://firebasestorage.googleapis.com/v0/b/mini-devfest-ostrava.appspot.com/o/speakers%2Fcompanies%2Ffnxio.jpg?alt=media&amp;token=c08a5e56-50c5-448f-b7f1-ab974cdce9c4"
+              alt="fnx.io">
+            <div class="speaker-about">
+              <p class="text">
+                Tomas is Google Developer Expert on Dart and Google Cloud Platform, co-owner of digital agency
+                Multimedia atelier and founder of backend studio fnx.io.
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="mdc-dialog__scrim"></div>
     </div>
   </div>
   <div class="schedule-section section">
