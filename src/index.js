@@ -26,6 +26,40 @@ fetchSpeakers();
 
 function openDialog(id) {
     const dialog = new MDCDialog(document.querySelector('.mdc-dialog'));
+    dialog.listen('MDCDialog:opened', () => {
+        const speaker = speakers[id];
+        const name = document.getElementById('dialog-speaker-name');
+        const position = document.getElementById('dialog-speaker-position');
+        const companyLogo = document.getElementById('dialog-speaker-company');
+        const photo = document.getElementById('dialog-speaker-photo');
+        const about = document.getElementById('dialog-speaker-text-about');
+
+        name.innerText = speaker.name;
+        position.innerHTML = speaker.position + (speaker.company ? ', ' + speaker.company : '');
+        photo.src = speaker.photoUrl;
+        if (speaker.companyLogo) {
+            companyLogo.style.display = 'block';
+            companyLogo.src = speaker.companyLogo;
+        } else {
+            companyLogo.style.display = 'none';
+        }
+        about.innerText = speaker.about;
+    });
+
+    dialog.listen('MDCDialog:closed', () => {
+        const name = document.getElementById('dialog-speaker-name');
+        const position = document.getElementById('dialog-speaker-position');
+        const companyLogo = document.getElementById('dialog-speaker-company');
+        const photo = document.getElementById('dialog-speaker-photo');
+        const about = document.getElementById('dialog-speaker-text-about');
+
+        name.innerText = '';
+        position.innerText = '';
+        photo.src = '';
+        companyLogo.src = '';
+        companyLogo.style.display = 'none';
+        about.innerText = '';
+    });
     dialog.open();
 }
 
@@ -44,8 +78,7 @@ function fetchSpeakers() {
                 div.innerHTML = `
                     <img class="speaker-photo" src="${data.photoUrl}" alt="${data.name}">
                     <h5 class="speaker-name">${data.name}</h5>
-                    ${data.position && !data.company && `<h6 class="
-                    console.log(speaker-position">${data.position}</h6>` || ''}
+                    ${data.position && !data.company && `<h6 class="speaker-position">${data.position}</h6>` || ''}
                     ${data.position && data.company && `<h6 class="speaker-position">${data.position}, ${data.company}</h6>` || ''}
                     ${data.companyLogo && data.company && `<img class="speaker-company" src="${data.companyLogo}" alt="${data.company}">` || ''}
                     ${!data.companyLogo && `<div class="speaker-company"></div>` || ''}

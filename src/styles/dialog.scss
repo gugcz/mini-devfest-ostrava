@@ -62,9 +62,11 @@
 @media screen and (min-width: 1024px) {
     .speaker-dialog .mdc-dialog__container {
         .mdc-dialog__surface {
-            min-width: unset;
-            max-width: 400px;
-            min-height: unset;
+            min-width: 500px;
+            max-width: 500px;
+            min-height: 600px;
+            max-height: unset;
+            height: unset;
             padding: 4px;
 
             .dialog-body {
