@@ -72,6 +72,36 @@
                     margin: 8px 0;
                     font-size: 1rem;
                 }
+
+                .topics-container {
+                    display: flex;
+                    flex-direction: row;
+                    height: 16px;
+                    margin: 4px 0;
+                
+                    .topic {
+                        display: flex;
+                        align-items: center;
+                        flex-direction: row;
+                        margin-left: 10px;
+                
+                        &-dot {
+                            border-radius: 6px;
+                            width: 10px;
+                            height: 10px;
+                            margin-right: 4px;
+                            margin-bottom: 1px;
+                        }
+                
+                        &-name {
+                            margin: 0;
+                        }
+                    }
+                
+                    .topic:first-child {
+                        margin-left: 0;
+                    }
+                }
             }
         }
     }

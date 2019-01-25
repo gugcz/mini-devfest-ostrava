@@ -35,6 +35,32 @@
     "@material/shape" "^0.42.0"
     "@material/theme" "^0.41.0"
 
+"@material/checkbox@^0.43.0":
+  version "0.43.0"
+  resolved "https://registry.yarnpkg.com/@material/checkbox/-/checkbox-0.43.0.tgz#12d11c4516e7492cfb87d47988c93070f0935924"
+  integrity sha512-LDAD+35I53oMNTIDr8fcVfm9BukwtKnos7FD4axstowminSDRujl26g0uTyi9iLhnkR8Vl70Xl60L6kh+GBX1A==
+  dependencies:
+    "@material/animation" "^0.41.0"
+    "@material/base" "^0.41.0"
+    "@material/ripple" "^0.43.0"
+    "@material/rtl" "^0.42.0"
+    "@material/selection-control" "^0.43.0"
+    "@material/theme" "^0.43.0"
+
+"@material/chips@^0.43.0":
+  version "0.43.0"
+  resolved "https://registry.yarnpkg.com/@material/chips/-/chips-0.43.0.tgz#5db8e7371dc0baac2081e8598a8bcfe5aecb40e3"
+  integrity sha512-iweQCpAabEAx/M0NSmP8c0y+I7nAqB8IWJ9L+a7QGnpcG6Om7Huhr3LSi4+ZmfpM1fTAdC9XKbvRBoPM5NWjPg==
+  dependencies:
+    "@material/animation" "^0.41.0"
+    "@material/base" "^0.41.0"
+    "@material/checkbox" "^0.43.0"
+    "@material/elevation" "^0.43.0"
+    "@material/ripple" "^0.43.0"
+    "@material/shape" "^0.43.0"
+    "@material/theme" "^0.43.0"
+    "@material/typography" "^0.43.0"
+
 "@material/dialog@^0.43.0":
   version "0.43.0"
   resolved "https://registry.yarnpkg.com/@material/dialog/-/dialog-0.43.0.tgz#e1d9791c0f96627d9963f8540c7e4b64de855726"
@@ -103,6 +129,13 @@
   version "0.42.0"
   resolved "https://registry.yarnpkg.com/@material/rtl/-/rtl-0.42.0.tgz#1836e78186c2d8b996f6fbf97adab203535335bc"
   integrity sha512-VrnrKJzhmspsN8WXHuxxBZ69yM5IwhCUqWr1t1eNfw3ZEvEj7i1g3P31HGowKThIN1dc1Wh4LE14rCISWCtv5w==
+
+"@material/selection-control@^0.43.0":
+  version "0.43.0"
+  resolved "https://registry.yarnpkg.com/@material/selection-control/-/selection-control-0.43.0.tgz#66ec4fb134c67546a1754f6d3dc16f5995bf3f7d"
+  integrity sha512-8vFMposydO3uZ9mWprTF7lUn3qniwuzLpjd3fZiMM0kSIT9hZautZdQlPjN6pV5sVvhf/Qgx3FZNnTvLm0MReA==
+  dependencies:
+    "@material/ripple" "^0.43.0"
 
 "@material/shape@^0.42.0":
   version "0.42.0"

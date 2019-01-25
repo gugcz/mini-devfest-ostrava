@@ -51,10 +51,37 @@ function openDialog(id) {
             const talkTitle = document.getElementById('dialog-talk-title');
             const talkLevel = document.getElementById('dialog-talk-level');
             const talkIntro = document.getElementById('dialog-talk-intro');
+            const topicsContainer = document.getElementById('dialog-talk-topics-container');
+            topicsContainer.innerHTML = '';
 
             talkTitle.innerText = speaker.talk.title;
-            talkLevel.innerText = speaker.talk.level;
-            talkIntro.innerText = speaker.talk.intro;
+            
+            if (speaker.talk.level) {
+                talkLevel.style.display = 'block';
+                talkLevel.innerText = speaker.talk.level;
+            } else {
+                talkLevel.style.display = 'none';
+            }
+
+            if (speaker.talk.intro) {
+                talkIntro.style.display = 'block';
+                talkIntro.innerHTML = speaker.talk.intro;
+            } else {
+                talkIntro.style.display = 'none';
+            }
+
+            if (speaker.talk.topics) {
+                topicsContainer.style.display = 'flex';
+                speaker.talk.topics
+                    .map(topic =>
+                        `<div class="topic">
+                            <div class="topic-dot" style="background-color: ${topic.color}"></div>
+                            <div class="topic-name">${topic.text}</div>
+                        </div>`)
+                    .forEach(topicHTML => topicsContainer.innerHTML +=topicHTML);
+            } else {
+                topicsContainer.style.display = 'none';
+            }
         } else {
             talkContainer.style.display = 'none';
         }
