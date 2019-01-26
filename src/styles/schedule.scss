@@ -8,61 +8,55 @@
     justify-content: center;
     color: $black-text-color;
     min-height: calc(100vh - 64px);
+    grid-template-columns: 1fr;
+    justify-items: center;
 
     .schedule-container {
         display: grid;
-        grid-template-columns: 100px 1fr;
+        grid-template-columns: 1fr;
         margin-top: 32px;
-        width: 1072px;
+        padding: 0 16px;
+        width: calc(100% - 32px);
 
         .talks-container {
             display: grid;
-            grid-template-columns: 1fr 1fr;
-            grid-column-gap: 16px;
+            grid-template-columns: 1fr;
             grid-gap: 16px;
-    
-            .talk {
+
+            .room, .talk {
                 box-shadow: 0 2px 1px -1px rgba(0,0,0,.2), 0 1px 1px 0 rgba(0,0,0,.14), 0 1px 3px 0 rgba(0,0,0,.12);
                 border-radius: 24px 8px;
                 padding: 16px;
-    
+            }
+
+            .room {
+                display: none;
+
+                .room-name {
+                    font-size: 1.25rem;
+                    line-height: 1.25rem;
+                    text-align: center;
+                    font-weight: 400;
+                    margin: 0;
+                }
+            }
+
+            .talk {
+                width: 100%;
                 &-name {
                     font-size: 1.25rem;
+                    line-height: 1.25rem;
                     margin: 0 0 4px 0;
+                    font-weight: 400;
                 }
-    
-                .topics-container {
-                    display: flex;
-                    flex-direction: row;
-                    height: 16px;
-                    margin: 4px 0;
-    
-                    .topic {
-                        display: flex;
-                        align-items: center;
-                        flex-direction: row;
-                        margin-left: 10px;
-    
-                        &-dot {
-                            border-radius: 6px;
-                            width: 10px;
-                            height: 10px;
-                            margin-right: 4px;
-                            margin-bottom: 1px;
-                        }
-    
-                        &-name {
-                            margin: 0;
-                        }
-                    }
-    
-                    .topic:first-child {
-                        margin-left: 0;
-                    }
+
+                .mobile-description .mobile-description-text {
+                    margin: 8px 0 4px;
+                    font-weight: bold;
                 }
-    
+
                 .description .description-text {
-                    margin: 4px 0 8px;
+                    margin: 0 0 8px;
                 }
     
                 .speaker-container {
@@ -82,19 +76,20 @@
     
                         .name {
                             font-size: 1.1rem;
+                            line-height: 1.1rem;
                             margin: 0 0 4px 0;
                         }
                         
                         .position {
                             margin: 0;
                             font-size: 0.85rem;
+                            line-height: 0.85rem;
                         }
                     }
                 }
             }
 
             .full-column {
-                grid-column: 1 / span 2;
                 text-align: center;
 
                 .talk-name {
@@ -104,13 +99,43 @@
         }
 
         .timer-container {
-            display: grid;
-            grid-template-rows: 1fr 1fr 57px 1fr 1fr;
-            grid-row-gap: 16px;
+            display: none;
+        }
+    }
+}
 
-            .time {
-                margin: 16px 0;
-                font-size: 1.25rem;
+@media screen and (min-width: 768px) {
+    .schedule-section {
+        .schedule-container {
+            grid-template-columns: 80px 1fr;
+            max-width: 992px;
+
+            .talks-container {
+                grid-template-columns: 1fr 1fr;
+
+                .room {
+                    display: block;
+                }
+
+                .full-column {
+                    grid-column: 1 / span 2;
+                }
+
+                .mobile-description {
+                    display: none;
+                }
+            }
+     
+            .timer-container {
+                display: grid;
+                grid-template-rows: 57px 1fr 1fr 57px 1fr 1fr;
+                grid-row-gap: 16px;
+        
+                .time {
+                    margin: 16px 0;
+                    font-size: 1.25rem;
+                    line-height: 1.25rem;
+                }
             }
         }
     }
