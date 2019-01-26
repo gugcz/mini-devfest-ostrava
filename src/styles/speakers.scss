@@ -31,13 +31,15 @@
 
             &-name {
                 text-align: center;
-                margin: 16px 0 12px 0;
+                margin: 4px 0 0 0;
                 font-size: $mobile-speaker-name-font-size;
+                line-height: $mobile-speaker-name-font-size;
             }
 
             &-position {
                 margin: 0 0 12px 0;
                 font-size: $mobile-speaker-position-font-size;
+                line-height: $mobile-speaker-position-font-size;
                 text-align: center;
             }
 

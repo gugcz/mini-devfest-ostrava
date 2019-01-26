@@ -34,7 +34,9 @@
 
                 .room-name {
                     font-size: 1.25rem;
+                    line-height: 1.25rem;
                     text-align: center;
+                    font-weight: 400;
                     margin: 0;
                 }
             }
@@ -43,7 +45,9 @@
                 width: 100%;
                 &-name {
                     font-size: 1.25rem;
+                    line-height: 1.25rem;
                     margin: 0 0 4px 0;
+                    font-weight: 400;
                 }
 
                 .mobile-description .mobile-description-text {
@@ -52,7 +56,7 @@
                 }
 
                 .description .description-text {
-                    margin: 4px 0 8px;
+                    margin: 0 0 8px;
                 }
     
                 .speaker-container {
@@ -72,12 +76,14 @@
     
                         .name {
                             font-size: 1.1rem;
+                            line-height: 1.1rem;
                             margin: 0 0 4px 0;
                         }
                         
                         .position {
                             margin: 0;
                             font-size: 0.85rem;
+                            line-height: 0.85rem;
                         }
                     }
                 }
@@ -128,6 +134,7 @@
                 .time {
                     margin: 16px 0;
                     font-size: 1.25rem;
+                    line-height: 1.25rem;
                 }
             }
         }

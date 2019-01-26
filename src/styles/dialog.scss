@@ -37,11 +37,13 @@
             .speaker-name {
                 margin: 16px 0 0 0;
                 font-size: 1.75rem;
+                line-height: 1.75rem;
             }
     
             .speaker-position {
-                margin: 12px 0;
+                margin: 12px 0 16px 0;
                 font-size: 1.25rem;
+                line-height: 1.25rem;
             }
     
             .speaker-company {
@@ -66,11 +68,13 @@
                 .talk-title {
                     margin: 0;
                     font-size: 1.5rem;
+                    line-height: 1.5rem;
                 }
 
                 .talk-level {
-                    margin: 8px 0;
+                    margin: 12px 0;
                     font-size: 1rem;
+                    line-height: 1rem;
                 }
 
                 .topics-container {
@@ -114,7 +118,6 @@
             min-width: 400px;
             max-width: 400px;
             min-height: 600px;
-            max-height: unset;
             height: unset;
             padding: 4px;
             border-radius: 4px;
@@ -136,7 +139,6 @@
             min-width: 500px;
             max-width: 500px;
             min-height: 600px;
-            max-height: unset;
             height: unset;
             padding: 4px;
             border-radius: 4px;

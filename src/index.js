@@ -76,7 +76,7 @@ function openDialog(id) {
                     .map(topic =>
                         `<div class="topic">
                             <div class="topic-dot" style="background-color: ${topic.color}"></div>
-                            <div class="topic-name">${topic.text}</div>
+                            <div class="topic-name mdc-typography--body1">${topic.text}</div>
                         </div>`)
                     .forEach(topicHTML => topicsContainer.innerHTML +=topicHTML);
             } else {
@@ -116,9 +116,9 @@ function toDiv(data, doc) {
     div.onclick = () => openDialog(doc.id);
     div.innerHTML = `
             <img class="speaker-photo" src="${data.photoUrl}" alt="${data.name}">
-            <h5 class="speaker-name">${data.name}</h5>
-            ${data.position && !data.company && `<h6 class="speaker-position">${data.position}</h6>` || ''}
-            ${data.position && data.company && `<h6 class="speaker-position">${data.position}, ${data.company}</h6>` || ''}
+            <h2 class="speaker-name mdc-typography--headline2">${data.name}</h2>
+            ${data.position && !data.company && `<h3 class="speaker-position mdc-typography--headline3">${data.position}</h3>` || ''}
+            ${data.position && data.company && `<h3 class="speaker-position mdc-typography--headline3">${data.position}, ${data.company}</h3>` || ''}
             ${data.companyLogo && data.company && `<img class="speaker-company" src="${data.companyLogo}" alt="${data.company}">` || ''}
             ${!data.companyLogo && `<div class="speaker-company"></div>` || ''}
         `;

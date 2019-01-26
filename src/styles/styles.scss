@@ -85,6 +85,7 @@ body {
     text-align: center;
     margin: 0;
     font-size: $mobile-section-title-font-size;
+    line-height: $mobile-section-title-font-size;
     color: $black-text-color;
 }
 
@@ -103,6 +104,7 @@ body {
         .organizer-title {
             margin: 16px;
             font-size: $mobile-organizer-font-size;
+            line-height: $mobile-organizer-font-size;
             text-align: center;
         }
     
@@ -183,6 +185,7 @@ body {
     .footer {
         .organizer-title {
             font-size: $desktop-organizer-font-size;
+            line-height: $desktop-organizer-font-size;
         }
 
         .contact-container .buttons-container {
