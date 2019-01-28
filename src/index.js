@@ -58,7 +58,10 @@ function openDialog(id) {
             
             if (speaker.talk.level) {
                 talkLevel.style.display = 'block';
-                talkLevel.innerText = speaker.talk.level;
+                talkLevel.innerText = speaker.talk.level + " / " + speaker.talk.language;
+            } else if (speaker.talk.language) {
+                talkLevel.style.display = 'block';
+                talkLevel.innerText = speaker.talk.language;
             } else {
                 talkLevel.style.display = 'none';
             }
