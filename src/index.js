@@ -23,6 +23,7 @@ const iconButtonRipple = new MDCRipple(document.querySelector('.mdc-icon-button'
 iconButtonRipple.unbounded = true;
 
 fetchSpeakers();
+fetchTimes();
 
 function openDialog(id) {
     const dialog = new MDCDialog(document.querySelector('.mdc-dialog'));
@@ -141,4 +142,19 @@ function fetchSpeakers() {
             }).catch(error => console.log("Error getting documents: ", error));
         }))
         .catch(error => console.log("Error getting documents: ", error));
+}
+
+function fetchTimes() {
+    const timesContainer = document.getElementById('times-container');
+    let gridTemplateRows = '57px ';
+    db.collection('times').orderBy('order')
+        .get()
+        .then(querySnapshot => querySnapshot.forEach(doc => {
+            const data = doc.data();
+            gridTemplateRows += data.lower ? '57px ' : '1fr ';
+            timesContainer.innerHTML += `<p class="time mdc-typography--headline4">${data.time}</p>`;
+        }))
+        .then(() => timesContainer.style.gridTemplateRows = gridTemplateRows)
+        .catch(error => console.log("Error getting documents: ", error));
+    
 }
