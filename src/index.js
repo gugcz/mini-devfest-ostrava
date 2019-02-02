@@ -24,6 +24,7 @@ iconButtonRipple.unbounded = true;
 
 fetchSpeakers();
 fetchTimes();
+fetchSchedule();
 
 function openDialog(id) {
     const dialog = new MDCDialog(document.querySelector('.mdc-dialog'));
@@ -146,6 +147,7 @@ function fetchSpeakers() {
 
 function fetchTimes() {
     const timesContainer = document.getElementById('times-container');
+    const talksContainer = document.getElementById('talks-container');
     let gridTemplateRows = '57px ';
     db.collection('times').orderBy('order')
         .get()
@@ -154,7 +156,28 @@ function fetchTimes() {
             gridTemplateRows += data.lower ? '57px ' : '1fr ';
             timesContainer.innerHTML += `<p class="time mdc-typography--headline4">${data.time}</p>`;
         }))
-        .then(() => timesContainer.style.gridTemplateRows = gridTemplateRows)
+        .then(() => {
+            timesContainer.style.gridTemplateRows = gridTemplateRows;
+            talksContainer.style.gridTemplateRows = gridTemplateRows;
+        })
         .catch(error => console.log("Error getting documents: ", error));
-    
+}
+
+function fetchSchedule() {
+    const talksContainer = document.getElementById('talks-container');
+    db.collection('rooms')
+        .get()
+        .then(querySnapshot => querySnapshot.forEach(doc => {
+            const room = doc.data();
+            talksContainer.innerHTML += 
+                `<div class="mdc-card mdc-card--outlined mdc-card__primary-action mdc-ripple-upgraded room column-${room.column}">
+                    <h2 class="room-name mdc-typography--headline2">${room.name}</h2>
+                </div>`;
+        }))
+        .then(fetchTalks)
+        .catch(error => console.log("Error getting documents: ", error));
+}
+
+function fetchTalks() {
+
 }
