@@ -24,7 +24,7 @@ iconButtonRipple.unbounded = true;
 
 fetchSpeakersAndTalks();
 fetchTimes();
-fetchRooms();
+fetchSchedule();
 
 function openDialog(id) {
     const dialog = new MDCDialog(document.querySelector('.mdc-dialog'));
@@ -133,7 +133,7 @@ function speakerToDiv(data, doc) {
 function talkToDiv(data, doc) {
     const { talk } = data;
     const div = document.createElement('div');
-    div.className = 'mdc-card mdc-card--outlined mdc-card__primary-action mdc-ripple-upgraded talk ' + (talk.full ? 'full ' : 'column-' + talk.column) + 'row-' + talk.row;
+    div.className = 'mdc-card mdc-card--outlined mdc-card__primary-action mdc-ripple-upgraded talk ' + (talk.full ? 'full ' : ('column-' + talk.column + ' ')) + 'row-' + talk.row;
     div.onclick = () => openDialog(doc.id);
     div.innerHTML = `
             <h2 class="talk-name mdc-typography--headline2">${talk.title}</h2>
@@ -174,7 +174,9 @@ function fetchSpeakersAndTalks() {
                 data.talk = talk.data();
                 speakers[doc.id] = data;
                 speakersContainer.appendChild(speakerToDiv(data, doc));
-                !talk.empty && talksContainer.appendChild(talkToDiv(data, doc));
+                if (!talk.empty) {
+                    talksContainer.appendChild(talkToDiv(data, doc));
+                }
             }).catch(error => console.log("Error getting documents: ", error));
         }))
         .catch(error => console.log("Error getting documents: ", error));
@@ -198,15 +200,16 @@ function fetchTimes() {
         .catch(error => console.log("Error getting documents: ", error));
 }
 
-function fetchRooms() {
+function fetchSchedule() {
     const talksContainer = document.getElementById('talks-container');
-    db.collection('rooms')
+    db.collection('schedule')
         .get()
         .then(querySnapshot => querySnapshot.forEach(doc => {
-            const room = doc.data();
+            const item = doc.data();
+            console.log(item);
             talksContainer.innerHTML +=
-                `<div class="mdc-card mdc-card--outlined mdc-card__primary-action mdc-ripple-upgraded room column-${room.column}">
-                    <h2 class="room-name mdc-typography--headline2">${room.name}</h2>
+                `<div class="mdc-card mdc-card--outlined mdc-card__primary-action mdc-ripple-upgraded schedule-item row-${item.row} ${item.fullColumn ? 'full-column' : ('column-' + item.column)}">
+                    <h2 class="item-name mdc-typography--headline2">${item.name}</h2>
                 </div>`;
         }))
         .catch(error => console.log("Error getting documents: ", error));
