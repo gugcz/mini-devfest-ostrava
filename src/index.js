@@ -133,7 +133,7 @@ function speakerToDiv(data, doc) {
 function talkToDiv(data, doc) {
     const { talk } = data;
     const div = document.createElement('div');
-    div.className = 'mdc-card mdc-card--outlined mdc-card__primary-action mdc-ripple-upgraded talk ' + (talk.full ? 'full ' : ('column-' + talk.column + ' ')) + 'row-' + talk.row;
+    div.className = 'mdc-card mdc-card--outlined mdc-card__primary-action mdc-ripple-upgraded talk ' + (talk.full ? 'full ' : ('column-' + talk.column + ' ')) + 'row-' + talk.row + ' mobile-row-' + talk.mobileRow;
     div.onclick = () => openDialog(doc.id);
     div.innerHTML = `
             <h2 class="talk-name mdc-typography--headline2">${talk.title}</h2>
@@ -173,6 +173,7 @@ function fetchSpeakersAndTalks() {
             data.talkRef.get().then(talk => {
                 data.talk = talk.data();
                 speakers[doc.id] = data;
+                data.talk.mobileRow = (data.talk.row - 2) * 2 + data.talk.column;
                 speakersContainer.appendChild(speakerToDiv(data, doc));
                 if (!talk.empty) {
                     talksContainer.appendChild(talkToDiv(data, doc));
@@ -185,12 +186,10 @@ function fetchSpeakersAndTalks() {
 function fetchTimes() {
     const timesContainer = document.getElementById('times-container');
     const talksContainer = document.getElementById('talks-container');
-    let gridTemplateRows = '57px ';
     db.collection('times').orderBy('order')
         .get()
         .then(querySnapshot => querySnapshot.forEach(doc => {
             const data = doc.data();
-            gridTemplateRows += data.lower ? '57px ' : '1fr ';
             timesContainer.innerHTML += `<p class="time mdc-typography--headline4">${data.time}</p>`;
         }))
         .then(() => {
@@ -206,9 +205,8 @@ function fetchSchedule() {
         .get()
         .then(querySnapshot => querySnapshot.forEach(doc => {
             const item = doc.data();
-            console.log(item);
             talksContainer.innerHTML +=
-                `<div class="mdc-card mdc-card--outlined mdc-card__primary-action mdc-ripple-upgraded schedule-item row-${item.row} ${item.fullColumn ? 'full-column' : ('column-' + item.column)}">
+                `<div class="mdc-card mdc-card--outlined mdc-card__primary-action mdc-ripple-upgraded schedule-item row-${item.row} ${item.fullColumn ? 'full-column' : ('column-' + item.column)} ${item.hideOnMobile && ' no-mobile' || ''}">
                     <h2 class="item-name mdc-typography--headline2">${item.name}</h2>
                 </div>`;
         }))

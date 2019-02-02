@@ -42,25 +42,6 @@
                 }
             }
 
-            .column-1 {
-                grid-column: 1;
-            }
-
-            .column-2 {
-                grid-column: 2;
-            }
-            
-            @for $i from 1 through 6 {
-                .row-#{$i} {
-                    grid-row: $i;
-                }
-            }
-
-            .full-column {
-                grid-column-start: 1;
-                grid-column-end: 3;
-            }
-
             .talk {
                 width: 100%;
                 &-name {
@@ -119,18 +100,29 @@
     }
 }
 
-@media screen and (min-width: 768px) {
+@media screen and (max-width: 1023px) {
+    .no-mobile {
+        display: none;
+    }
+    .schedule-section .schedule-container .talks-container .talk {
+        @for $i from 1 through 14 {
+            &.mobile-row-#{$i} {
+                grid-row: $i;
+            }
+        } 
+    }
+}
+
+@media screen and (min-width: 1024px) {
     .schedule-section {
         .schedule-container {
             grid-template-columns: 80px 1fr;
             max-width: 992px;
+            width: 100%;
 
             .talks-container {
                 grid-template-columns: 1fr 1fr;
-
-                .room {
-                    display: block;
-                }
+                grid-template-rows: 57px 1fr 1fr 57px 1fr 1fr;
 
                 .full-column {
                     grid-column: 1 / span 2;
@@ -138,6 +130,20 @@
 
                 .mobile-description {
                     display: none;
+                }
+
+                .column-1 {
+                    grid-column: 1;
+                }
+
+                .column-2 {
+                    grid-column: 2;
+                }
+                
+                @for $i from 1 through 6 {
+                    .row-#{$i} {
+                        grid-row: $i;
+                    }
                 }
             }
      
