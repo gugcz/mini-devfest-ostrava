@@ -1,5 +1,4 @@
 @import "@material/typography/mdc-typography";
-@import "@material/chips/mdc-chips";
 @import "./colors.scss";
 @import "./variables.scss";
 @import "./buttons.scss";
@@ -111,6 +110,28 @@ body {
         .organizer-logo {
             width: 100%;
             max-width: 360px;
+        }
+    }
+
+    .partners-container {
+        display: grid;
+        justify-content: center;
+        margin-top: 32px;
+
+        .partner-title {
+            margin: 16px;
+            font-size: $mobile-organizer-font-size;
+            line-height: $mobile-organizer-font-size;
+            text-align: center;
+        }
+    
+        .logos-container {
+            display: grid;
+            justify-content: center;
+            .logo {
+                width: 100%;
+                max-width: 360px;
+            }
         }
     }
 
