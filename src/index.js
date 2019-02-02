@@ -22,9 +22,9 @@ const speakers = {};
 const iconButtonRipple = new MDCRipple(document.querySelector('.mdc-icon-button'));
 iconButtonRipple.unbounded = true;
 
-fetchSpeakers();
+fetchSpeakersAndTalks();
 fetchTimes();
-fetchSchedule();
+fetchRooms();
 
 function openDialog(id) {
     const dialog = new MDCDialog(document.querySelector('.mdc-dialog'));
@@ -57,7 +57,7 @@ function openDialog(id) {
             topicsContainer.innerHTML = '';
 
             talkTitle.innerText = speaker.talk.title;
-            
+
             if (speaker.talk.level) {
                 talkLevel.style.display = 'block';
                 talkLevel.innerText = speaker.talk.level + " / " + speaker.talk.language;
@@ -83,7 +83,7 @@ function openDialog(id) {
                             <div class="topic-dot" style="background-color: ${topic.color}"></div>
                             <div class="topic-name mdc-typography--body1">${topic.text}</div>
                         </div>`)
-                    .forEach(topicHTML => topicsContainer.innerHTML +=topicHTML);
+                    .forEach(topicHTML => topicsContainer.innerHTML += topicHTML);
             } else {
                 topicsContainer.style.display = 'none';
             }
@@ -115,7 +115,7 @@ function openDialog(id) {
     dialog.open();
 }
 
-function toDiv(data, doc) {
+function speakerToDiv(data, doc) {
     const div = document.createElement('div');
     div.className = 'mdc-card mdc-card--outlined speaker mdc-card__primary-action mdc-ripple-upgraded speaker-' + data.order;
     div.onclick = () => openDialog(doc.id);
@@ -130,8 +130,42 @@ function toDiv(data, doc) {
     return div;
 }
 
-function fetchSpeakers() {
+function talkToDiv(data, doc) {
+    const { talk } = data;
+    const div = document.createElement('div');
+    div.className = 'mdc-card mdc-card--outlined mdc-card__primary-action mdc-ripple-upgraded talk ' + (talk.full ? 'full ' : 'column-' + talk.column) + 'row-' + talk.row;
+    div.onclick = () => openDialog(doc.id);
+    div.innerHTML = `
+            <h2 class="talk-name mdc-typography--headline2">${talk.title}</h2>
+            <div class="topics-container">
+            ${talk.topics.map(topic =>
+                `<div class="topic">
+                        <div class="topic-dot" style="background-color: ${topic.color}"></div>
+                        <p class="topic-name mdc-typography--body1">${topic.text}</p>
+                    </div>`
+            ).join('')}
+            </div>
+            <div class="mobile-description">
+            <p class="mobile-description-text mdc-typography--body1">${talk.time} / ${talk.room}</p>
+            </div>
+            <div class="description">
+            <p class="description-text mdc-typography--body1">${talk.level} / ${talk.language} / ${talk.length}</p>
+            </div>
+            <div class="speaker-container">
+            <img class="speaker-photo" src="${data.photoUrl}" alt="${data.name}">
+            <div class="speaker-text">
+                <h3 class="name mdc-typography--headline3">${data.name}</h3>
+                ${data.position && !data.company && `<h4 class="position mdc-typography--headline4">${data.position}</h4>` || ''}
+                ${data.position && data.company && `<h4 class="position mdc-typography--headline4">${data.position}, ${data.company}</h4>` || ''}
+            </div>
+            </div>
+        `;
+    return div;
+}
+
+function fetchSpeakersAndTalks() {
     const speakersContainer = document.getElementById('speakers-container');
+    const talksContainer = document.getElementById('talks-container');
     db.collection('speakers').orderBy('order')
         .get()
         .then(querySnapshot => querySnapshot.forEach(doc => {
@@ -139,7 +173,8 @@ function fetchSpeakers() {
             data.talkRef.get().then(talk => {
                 data.talk = talk.data();
                 speakers[doc.id] = data;
-                speakersContainer.appendChild(toDiv(data, doc));
+                speakersContainer.appendChild(speakerToDiv(data, doc));
+                !talk.empty && talksContainer.appendChild(talkToDiv(data, doc));
             }).catch(error => console.log("Error getting documents: ", error));
         }))
         .catch(error => console.log("Error getting documents: ", error));
@@ -163,21 +198,16 @@ function fetchTimes() {
         .catch(error => console.log("Error getting documents: ", error));
 }
 
-function fetchSchedule() {
+function fetchRooms() {
     const talksContainer = document.getElementById('talks-container');
     db.collection('rooms')
         .get()
         .then(querySnapshot => querySnapshot.forEach(doc => {
             const room = doc.data();
-            talksContainer.innerHTML += 
+            talksContainer.innerHTML +=
                 `<div class="mdc-card mdc-card--outlined mdc-card__primary-action mdc-ripple-upgraded room column-${room.column}">
                     <h2 class="room-name mdc-typography--headline2">${room.name}</h2>
                 </div>`;
         }))
-        .then(fetchTalks)
         .catch(error => console.log("Error getting documents: ", error));
-}
-
-function fetchTalks() {
-
 }

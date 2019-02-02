@@ -50,6 +50,17 @@
             .column-2 {
                 grid-column: 2;
             }
+            
+            @for $i from 1 through 6 {
+                .row-#{$i} {
+                    grid-row: $i;
+                }
+            }
+
+            .full-column {
+                grid-column-start: 1;
+                grid-column-end: 3;
+            }
 
             .talk {
                 width: 100%;
