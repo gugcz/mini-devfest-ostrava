@@ -205,10 +205,17 @@ function fetchSchedule() {
         .get()
         .then(querySnapshot => querySnapshot.forEach(doc => {
             const item = doc.data();
-            talksContainer.innerHTML +=
-                `<div class="mdc-card mdc-card--outlined mdc-card__primary-action mdc-ripple-upgraded schedule-item row-${item.row} ${item.fullColumn ? 'full-column' : ('column-' + item.column)} ${item.hideOnMobile && ' no-mobile' || ''}">
-                    <h2 class="item-name mdc-typography--headline2">${item.name}</h2>
-                </div>`;
+            if (item.fullColumn) {
+                talksContainer.innerHTML +=
+                    `<div class="mdc-card mdc-card--outlined mdc-card__primary-action mdc-ripple-upgraded schedule-item row-${item.row} ${item.hideOnMobile && ' no-mobile ' || ''} ${'mobile-row-' + (item.row * 2 - 3)} full-column">
+                        <h2 class="item-name mdc-typography--headline2">${item.name}</h2>
+                    </div>`;
+            } else {
+                talksContainer.innerHTML +=
+                    `<div class="mdc-card mdc-card--outlined mdc-card__primary-action mdc-ripple-upgraded schedule-item row-${item.row} ${'column-' + item.column} ${item.hideOnMobile && ' no-mobile' || ''}">
+                        <h2 class="item-name mdc-typography--headline2">${item.name}</h2>
+                    </div>`;
+            }
         }))
         .catch(error => console.log("Error getting documents: ", error));
 }
