@@ -23,16 +23,17 @@
             grid-template-columns: 1fr;
             grid-gap: 16px;
 
-            .room, .talk {
+            .schedule-item, .talk {
                 box-shadow: 0 2px 1px -1px rgba(0,0,0,.2), 0 1px 1px 0 rgba(0,0,0,.14), 0 1px 3px 0 rgba(0,0,0,.12);
                 border-radius: 24px 8px;
                 padding: 16px;
             }
 
-            .room {
-                display: none;
+            .schedule-item {
+                cursor: default;
+                grid-row: 1;
 
-                .room-name {
+                .item-name {
                     font-size: 1.25rem;
                     line-height: 1.25rem;
                     text-align: center;
@@ -62,6 +63,8 @@
                 .speaker-container {
                     display: flex;
                     flex-direction: row;
+                    flex: 1;
+                    align-items: flex-end;
     
                     .speaker-photo {
                         height: 48px;
@@ -73,6 +76,7 @@
                         flex-direction: column;
                         justify-content: center;
                         margin-left: 8px;
+                        margin-bottom: 7px;
     
                         .name {
                             font-size: 1.1rem;
@@ -88,55 +92,89 @@
                     }
                 }
             }
-
-            .full-column {
-                text-align: center;
-
-                .talk-name {
-                    margin: 0;
-                }
-            }
         }
 
-        .timer-container {
+        .times-container {
             display: none;
         }
     }
 }
 
+@media screen and (max-width: 767px) {
+    .no-mobile {
+        display: none;
+    }
+    .schedule-section .schedule-container .talks-container {
+        .full-column {
+            height: 57px;
+            @for $i from 1 through 14 {
+                &.mobile-row-#{$i} {
+                    grid-row: $i / span 2;
+                }
+            } 
+        }
+
+        .talk {
+            @for $i from 1 through 14 {
+                &.mobile-row-#{$i} {
+                    grid-row: $i;
+                }
+            } 
+        }
+    }    
+}
+
 @media screen and (min-width: 768px) {
-    .schedule-section {
-        .schedule-container {
-            grid-template-columns: 80px 1fr;
-            max-width: 992px;
+    .schedule-section .schedule-container {
+        grid-template-columns: 80px 1fr;
+        max-width: 656px;
+        width: 100%;
+        position: relative;
+        left: -40px;
 
-            .talks-container {
-                grid-template-columns: 1fr 1fr;
+        .talks-container {
+            grid-template-columns: 1fr 1fr;
+            grid-template-rows: 57px 57px 57px 1fr 1fr 57px 1fr 1fr 57px 57px;
 
-                .room {
-                    display: block;
-                }
-
-                .full-column {
-                    grid-column: 1 / span 2;
-                }
-
-                .mobile-description {
-                    display: none;
-                }
+            .full-column {
+                grid-column: 1 / span 2;
             }
-     
-            .timer-container {
-                display: grid;
-                grid-template-rows: 57px 1fr 1fr 57px 1fr 1fr;
-                grid-row-gap: 16px;
-        
-                .time {
-                    margin: 16px 0;
-                    font-size: 1.25rem;
-                    line-height: 1.25rem;
+
+            .mobile-description {
+                display: none;
+            }
+
+            .column-1 {
+                grid-column: 1;
+            }
+
+            .column-2 {
+                grid-column: 2;
+            }
+            
+            @for $i from 1 through 10 {
+                .row-#{$i} {
+                    grid-row: $i;
                 }
             }
         }
+    
+        .times-container {
+            display: grid;
+            grid-template-rows: 57px 57px 57px 1fr 1fr 57px 1fr 1fr 57px 57px;
+            grid-row-gap: 16px;
+    
+            .time {
+                margin: 16px 0;
+                font-size: 1.25rem;
+                line-height: 1.25rem;
+            }
+        }
+    }
+}
+
+@media screen and (min-width: 1024px) {
+    .schedule-section .schedule-container {
+        max-width: 912px;
     }
 }

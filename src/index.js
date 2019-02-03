@@ -22,7 +22,10 @@ const speakers = {};
 const iconButtonRipple = new MDCRipple(document.querySelector('.mdc-icon-button'));
 iconButtonRipple.unbounded = true;
 
-fetchSpeakers();
+fetchSpeakersAndTalks();
+fetchTimes();
+fetchSchedule();
+fetchPartners();
 
 function openDialog(id) {
     const dialog = new MDCDialog(document.querySelector('.mdc-dialog'));
@@ -55,7 +58,7 @@ function openDialog(id) {
             topicsContainer.innerHTML = '';
 
             talkTitle.innerText = speaker.talk.title;
-            
+
             if (speaker.talk.level) {
                 talkLevel.style.display = 'block';
                 talkLevel.innerText = speaker.talk.level + " / " + speaker.talk.language;
@@ -81,7 +84,7 @@ function openDialog(id) {
                             <div class="topic-dot" style="background-color: ${topic.color}"></div>
                             <div class="topic-name mdc-typography--body1">${topic.text}</div>
                         </div>`)
-                    .forEach(topicHTML => topicsContainer.innerHTML +=topicHTML);
+                    .forEach(topicHTML => topicsContainer.innerHTML += topicHTML);
             } else {
                 topicsContainer.style.display = 'none';
             }
@@ -113,7 +116,7 @@ function openDialog(id) {
     dialog.open();
 }
 
-function toDiv(data, doc) {
+function speakerToDiv(data, doc) {
     const div = document.createElement('div');
     div.className = 'mdc-card mdc-card--outlined speaker mdc-card__primary-action mdc-ripple-upgraded speaker-' + data.order;
     div.onclick = () => openDialog(doc.id);
@@ -128,8 +131,42 @@ function toDiv(data, doc) {
     return div;
 }
 
-function fetchSpeakers() {
+function talkToDiv(data, doc) {
+    const { talk } = data;
+    const div = document.createElement('div');
+    div.className = 'mdc-card mdc-card--outlined mdc-card__primary-action mdc-ripple-upgraded talk ' + (talk.full ? 'full ' : ('column-' + talk.column + ' ')) + 'row-' + talk.row + ' mobile-row-' + talk.mobileRow;
+    div.onclick = () => openDialog(doc.id);
+    div.innerHTML = `
+            <h2 class="talk-name mdc-typography--headline2">${talk.title}</h2>
+            <div class="topics-container">
+            ${talk.topics.map(topic =>
+                `<div class="topic">
+                        <div class="topic-dot" style="background-color: ${topic.color}"></div>
+                        <p class="topic-name mdc-typography--body1">${topic.text}</p>
+                    </div>`
+            ).join('')}
+            </div>
+            <div class="mobile-description">
+            <p class="mobile-description-text mdc-typography--body1">${talk.time} / ${talk.room}</p>
+            </div>
+            <div class="description">
+            <p class="description-text mdc-typography--body1">${talk.level} / ${talk.language} / ${talk.length}</p>
+            </div>
+            <div class="speaker-container">
+            <img class="speaker-photo" src="${data.photoUrl}" alt="${data.name}">
+            <div class="speaker-text">
+                <h3 class="name mdc-typography--headline3">${data.name}</h3>
+                ${data.position && !data.company && `<h4 class="position mdc-typography--headline4">${data.position}</h4>` || ''}
+                ${data.position && data.company && `<h4 class="position mdc-typography--headline4">${data.position}, ${data.company}</h4>` || ''}
+            </div>
+            </div>
+        `;
+    return div;
+}
+
+function fetchSpeakersAndTalks() {
     const speakersContainer = document.getElementById('speakers-container');
+    const talksContainer = document.getElementById('talks-container');
     db.collection('speakers').orderBy('order')
         .get()
         .then(querySnapshot => querySnapshot.forEach(doc => {
@@ -137,8 +174,62 @@ function fetchSpeakers() {
             data.talkRef.get().then(talk => {
                 data.talk = talk.data();
                 speakers[doc.id] = data;
-                speakersContainer.appendChild(toDiv(data, doc));
+                data.talk.mobileRow = (data.talk.row - 2) * 2 + data.talk.column;
+                speakersContainer.appendChild(speakerToDiv(data, doc));
+                if (!talk.empty) {
+                    talksContainer.appendChild(talkToDiv(data, doc));
+                }
             }).catch(error => console.log("Error getting documents: ", error));
+        }))
+        .catch(error => console.log("Error getting documents: ", error));
+}
+
+function fetchTimes() {
+    const timesContainer = document.getElementById('times-container');
+    const talksContainer = document.getElementById('talks-container');
+    db.collection('times').orderBy('order')
+        .get()
+        .then(querySnapshot => querySnapshot.forEach(doc => {
+            const data = doc.data();
+            timesContainer.innerHTML += `<p class="time mdc-typography--headline4">${data.time}</p>`;
+        }))
+        .then(() => {
+            timesContainer.style.gridTemplateRows = gridTemplateRows;
+            talksContainer.style.gridTemplateRows = gridTemplateRows;
+        })
+        .catch(error => console.log("Error getting documents: ", error));
+}
+
+function fetchSchedule() {
+    const talksContainer = document.getElementById('talks-container');
+    db.collection('schedule')
+        .get()
+        .then(querySnapshot => querySnapshot.forEach(doc => {
+            const item = doc.data();
+            if (item.fullColumn) {
+                talksContainer.innerHTML +=
+                    `<div class="mdc-card mdc-card--outlined mdc-card__primary-action mdc-ripple-upgraded schedule-item row-${item.row} ${item.hideOnMobile && ' no-mobile ' || ''} ${'mobile-row-' + (item.row * 2 - 3)} full-column">
+                        <h2 class="item-name mdc-typography--headline2">${item.name}</h2>
+                    </div>`;
+            } else {
+                talksContainer.innerHTML +=
+                    `<div class="mdc-card mdc-card--outlined mdc-card__primary-action mdc-ripple-upgraded schedule-item row-${item.row} ${'column-' + item.column} ${item.hideOnMobile && ' no-mobile' || ''}">
+                        <h2 class="item-name mdc-typography--headline2">${item.name}</h2>
+                    </div>`;
+            }
+        }))
+        .catch(error => console.log("Error getting documents: ", error));
+}
+
+function fetchPartners() {
+    const partnersContainer = document.getElementById('partners-container');
+    db.collection('partners')
+        .get()
+        .then(querySnapshot => querySnapshot.forEach(doc => {
+            const partner = doc.data();
+            partnersContainer.innerHTML = `<a href="${partner.url}" target="_blank">
+                <img class="partner-logo" src="${partner.imageUrl}" alt="${partner.name}">
+            </a>`;
         }))
         .catch(error => console.log("Error getting documents: ", error));
 }
