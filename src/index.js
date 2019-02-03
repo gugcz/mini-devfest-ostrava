@@ -25,6 +25,7 @@ iconButtonRipple.unbounded = true;
 fetchSpeakersAndTalks();
 fetchTimes();
 fetchSchedule();
+fetchPartners();
 
 function openDialog(id) {
     const dialog = new MDCDialog(document.querySelector('.mdc-dialog'));
@@ -216,6 +217,19 @@ function fetchSchedule() {
                         <h2 class="item-name mdc-typography--headline2">${item.name}</h2>
                     </div>`;
             }
+        }))
+        .catch(error => console.log("Error getting documents: ", error));
+}
+
+function fetchPartners() {
+    const partnersContainer = document.getElementById('partners-container');
+    db.collection('partners')
+        .get()
+        .then(querySnapshot => querySnapshot.forEach(doc => {
+            const partner = doc.data();
+            partnersContainer.innerHTML = `<a href="${partner.url}" target="_blank">
+                <img class="partner-logo" src="${partner.imageUrl}" alt="${partner.name}">
+            </a>`;
         }))
         .catch(error => console.log("Error getting documents: ", error));
 }
