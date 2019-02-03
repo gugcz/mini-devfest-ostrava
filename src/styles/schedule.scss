@@ -127,8 +127,10 @@
 @media screen and (min-width: 768px) {
     .schedule-section .schedule-container {
         grid-template-columns: 80px 1fr;
-        max-width: 736px;
+        max-width: 656px;
         width: 100%;
+        position: relative;
+        left: -40px;
 
         .talks-container {
             grid-template-columns: 1fr 1fr;
@@ -173,6 +175,6 @@
 
 @media screen and (min-width: 1024px) {
     .schedule-section .schedule-container {
-        max-width: 992px;
+        max-width: 912px;
     }
 }
