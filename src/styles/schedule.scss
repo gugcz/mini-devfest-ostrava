@@ -134,7 +134,7 @@
 
         .talks-container {
             grid-template-columns: 1fr 1fr;
-            grid-template-rows: 57px 1fr 1fr 57px 1fr 1fr;
+            grid-template-rows: 57px 57px 57px 1fr 1fr 57px 1fr 1fr 57px 57px;
 
             .full-column {
                 grid-column: 1 / span 2;
@@ -152,7 +152,7 @@
                 grid-column: 2;
             }
             
-            @for $i from 1 through 6 {
+            @for $i from 1 through 10 {
                 .row-#{$i} {
                     grid-row: $i;
                 }
@@ -161,7 +161,7 @@
     
         .times-container {
             display: grid;
-            grid-template-rows: 57px 1fr 1fr 57px 1fr 1fr;
+            grid-template-rows: 57px 57px 57px 1fr 1fr 57px 1fr 1fr 57px 57px;
             grid-row-gap: 16px;
     
             .time {
