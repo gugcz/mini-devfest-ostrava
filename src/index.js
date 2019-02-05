@@ -174,7 +174,7 @@ function fetchSpeakersAndTalks() {
             data.talkRef.get().then(talk => {
                 data.talk = talk.data();
                 speakers[doc.id] = data;
-                data.talk.mobileRow = (data.talk.row - 2) * 2 + data.talk.column;
+                data.talk.mobileRow = (data.talk.row - 2) * 2 + data.talk.column + 1;
                 speakersContainer.appendChild(speakerToDiv(data, doc));
                 if (!talk.empty) {
                     talksContainer.appendChild(talkToDiv(data, doc));
@@ -208,12 +208,12 @@ function fetchSchedule() {
             const item = doc.data();
             if (item.fullColumn) {
                 talksContainer.innerHTML +=
-                    `<div class="mdc-card mdc-card--outlined mdc-card__primary-action mdc-ripple-upgraded schedule-item row-${item.row} ${item.hideOnMobile && ' no-mobile ' || ''} ${'mobile-row-' + (item.row * 2 - 3)} full-column">
+                    `<div class="mdc-card mdc-card--outlined mdc-card__primary-action mdc-ripple-upgraded schedule-item row-${item.row} ${item.hideOnMobile && ' no-mobile ' || ''} ${'mobile-row-' + (item.row * 2 - 2)} full-column">
                         <h2 class="item-name mdc-typography--headline2">${item.name}</h2>
                     </div>`;
             } else {
                 talksContainer.innerHTML +=
-                    `<div class="mdc-card mdc-card--outlined mdc-card__primary-action mdc-ripple-upgraded schedule-item row-${item.row} ${'column-' + item.column} ${item.hideOnMobile && ' no-mobile' || ''}">
+                    `<div class="mdc-card mdc-card--outlined mdc-card__primary-action mdc-ripple-upgraded schedule-item row-${item.row} ${'column-' + item.column} ${item.hideOnMobile && ' no-mobile' || ''} ${'mobile-row-' + (item.row * 2 - 3 + item.column)}">
                         <h2 class="item-name mdc-typography--headline2">${item.name}</h2>
                     </div>`;
             }
