@@ -107,19 +107,17 @@
     .schedule-section .schedule-container .talks-container {
         .full-column {
             height: 57px;
-            @for $i from 1 through 14 {
+            @for $i from 1 through 18 {
                 &.mobile-row-#{$i} {
                     grid-row: $i / span 2;
                 }
             } 
         }
 
-        .talk {
-            @for $i from 1 through 14 {
-                &.mobile-row-#{$i} {
-                    grid-row: $i;
-                }
-            } 
+        @for $i from 1 through 18 {
+            .mobile-row-#{$i} {
+                grid-row: $i;
+            }
         }
     }    
 }
