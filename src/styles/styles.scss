@@ -128,10 +128,16 @@ body {
         .logos-container {
             display: grid;
             justify-content: center;
-            .logo {
-                width: 100%;
-                max-width: 360px;
-            }
+            grid-gap: 16px;
+            .logo-container {
+                display: flex;
+                justify-content: center;
+                .logo {
+                    width: 100%;
+                    max-width: 360px;
+                    max-height: 120px;
+                }
+            }            
         }
     }
 

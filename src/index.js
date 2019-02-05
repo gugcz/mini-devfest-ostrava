@@ -227,9 +227,11 @@ function fetchPartners() {
         .get()
         .then(querySnapshot => querySnapshot.forEach(doc => {
             const partner = doc.data();
-            partnersContainer.innerHTML = `<a href="${partner.url}" target="_blank">
-                <img class="partner-logo" src="${partner.imageUrl}" alt="${partner.name}">
-            </a>`;
+            partnersContainer.innerHTML += `<div class="logo-container">
+                <a href="${partner.url}" class="logo-link" target="_blank">
+                    <img class="logo" src="${partner.imageUrl}" alt="${partner.name}">
+                </a>
+            </div`;
         }))
         .catch(error => console.log("Error getting documents: ", error));
 }
