@@ -22,6 +22,9 @@ const speakers = {};
 const iconButtonRipple = new MDCRipple(document.querySelector('.mdc-icon-button'));
 iconButtonRipple.unbounded = true;
 
+const scrollDownButton = document.getElementById('scroll-down');
+scrollDownButton.onclick = scrollDownToSpeakers;
+
 fetchSpeakersAndTalks();
 fetchTimes();
 fetchSchedule();
@@ -234,4 +237,14 @@ function fetchPartners() {
             </div`;
         }))
         .catch(error => console.log("Error getting documents: ", error));
+}
+
+function scrollDownToSpeakers() {
+    const speakersSection = document.getElementById("speakers-section");
+
+    window.scrollBy({ 
+        top: speakersSection.offsetTop - window.pageYOffset - document.documentElement.clientTop,
+        left: 0, 
+        behavior: 'smooth' 
+      });
 }
