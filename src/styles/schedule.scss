@@ -40,6 +40,11 @@
                     font-weight: 400;
                     margin: 0;
                 }
+
+                &.track {
+                    border: none;
+                    box-shadow: none;
+                }
             }
 
             .talk {

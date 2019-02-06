@@ -214,6 +214,11 @@ function fetchSchedule() {
                     `<div class="mdc-card mdc-card--outlined mdc-card__primary-action mdc-ripple-upgraded schedule-item row-${item.row} ${item.hideOnMobile && ' no-mobile ' || ''} ${'mobile-row-' + (item.row * 2 - 2)} full-column">
                         <h2 class="item-name mdc-typography--headline2">${item.name}</h2>
                     </div>`;
+            } else if (item.track) {
+                talksContainer.innerHTML +=
+                    `<div class="track schedule-item row-${item.row} ${'column-' + item.column} ${item.hideOnMobile && ' no-mobile' || ''} ${'mobile-row-' + (item.row * 2 - 3 + item.column)}">
+                        <h2 class="item-name mdc-typography--headline2">${item.name}</h2>
+                    </div>`;
             } else {
                 talksContainer.innerHTML +=
                     `<div class="mdc-card mdc-card--outlined mdc-card__primary-action mdc-ripple-upgraded schedule-item row-${item.row} ${'column-' + item.column} ${item.hideOnMobile && ' no-mobile' || ''} ${'mobile-row-' + (item.row * 2 - 3 + item.column)}">
