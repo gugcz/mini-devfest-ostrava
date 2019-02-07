@@ -231,7 +231,7 @@ function fetchSchedule() {
 
 function fetchPartners() {
     const partnersContainer = document.getElementById('partners-container');
-    db.collection('partners')
+    db.collection('partners').orderBy('order')
         .get()
         .then(querySnapshot => querySnapshot.forEach(doc => {
             const partner = doc.data();
