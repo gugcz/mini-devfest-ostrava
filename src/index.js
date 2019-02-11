@@ -134,11 +134,10 @@ function speakerToDiv(data, doc) {
     return div;
 }
 
-function talkToDiv(data, doc) {
-    const { talk } = data;
+function talkToDiv(talk) {
     const div = document.createElement('div');
     div.className = 'mdc-card mdc-card--outlined mdc-card__primary-action mdc-ripple-upgraded talk ' + (talk.full ? 'full ' : ('column-' + talk.column + ' ')) + 'row-' + talk.row + ' mobile-row-' + talk.mobileRow;
-    div.onclick = () => openDialog(doc.id);
+    div.onclick = () => openDialog(talk.speakers[0].id);
     div.innerHTML = `
             <h2 class="talk-name mdc-typography--headline2">${talk.title}</h2>
             <div class="topics-container">
@@ -155,35 +154,62 @@ function talkToDiv(data, doc) {
             <div class="description">
             <p class="description-text mdc-typography--body1">${talk.level} / ${talk.language} / ${talk.length}</p>
             </div>
-            <div class="speaker-container">
-            <img class="speaker-photo" src="${data.photoUrl}" alt="${data.name}">
-            <div class="speaker-text">
-                <h3 class="name mdc-typography--headline3">${data.name}</h3>
-                ${data.position && !data.company && `<h4 class="position mdc-typography--headline4">${data.position}</h4>` || ''}
-                ${data.position && data.company && `<h4 class="position mdc-typography--headline4">${data.position}, ${data.company}</h4>` || ''}
-            </div>
+            <div class="speakers-container speakers-container-${talk.speakers.length}">
+                ${talk.speakers.map(speaker =>
+                    `<div class="speaker-container">
+                        <img class="speaker-photo" src="${speaker.photoUrl}" alt="${speaker.name}">
+                        <div class="speaker-text">
+                            <h3 class="name mdc-typography--headline3">${speaker.name}</h3>
+                            ${speaker.position && !speaker.company && `<h4 class="position mdc-typography--headline4">${speaker.position}</h4>` || ''}
+                            ${speaker.position && speaker.company && `<h4 class="position mdc-typography--headline4">${speaker.position}, ${speaker.company}</h4>` || ''}
+                        </div>
+                    </div>`).join('')}
             </div>
         `;
     return div;
 }
 
+function updateTalks() {
+    const talksContainer = document.getElementById('talks-container');
+    Array.from(document.getElementsByClassName('talk')).forEach(it => {
+        if (it) {
+            talksContainer.removeChild(it);
+        }
+    });
+    const talks = {};
+    Object.values(speakers).forEach(speaker => {
+        const talk = speaker.talk;
+        if (talks[talk.id]) {
+            talks[talk.id].speakers.push(speaker);
+        } else {
+            talks[talk.id] = talk;
+            talks[talk.id].speakers = [speaker];
+        }
+        console.log(Object.values(talks).length);
+    });
+    console.log(Object.values(talks));
+    Object.values(talks).map(talkToDiv).forEach(it => talksContainer.appendChild(it));
+}
+
 function fetchSpeakersAndTalks() {
     const speakersContainer = document.getElementById('speakers-container');
-    const talksContainer = document.getElementById('talks-container');
     db.collection('speakers').orderBy('order')
         .get()
         .then(querySnapshot => querySnapshot.forEach(doc => {
             const data = doc.data();
+            data.id = doc.id;
             data.talkRef.get().then(talk => {
                 data.talk = talk.data();
+                data.talk.id = talk.id;
                 speakers[doc.id] = data;
                 data.talk.mobileRow = (data.talk.row - 2) * 2 + data.talk.column + 1;
                 speakersContainer.appendChild(speakerToDiv(data, doc));
                 if (!talk.empty) {
-                    talksContainer.appendChild(talkToDiv(data, doc));
+                    updateTalks();
                 }
             }).catch(error => console.log("Error getting documents: ", error));
         }))
+        .then(() => console.log('after speakers'))
         .catch(error => console.log("Error getting documents: ", error));
 }
 

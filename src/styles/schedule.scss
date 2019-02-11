@@ -65,34 +65,47 @@
                     margin: 0 0 8px;
                 }
     
-                .speaker-container {
-                    display: flex;
-                    flex-direction: row;
+                .speakers-container {
+                    display: grid;
                     flex: 1;
                     align-items: flex-end;
-    
-                    .speaker-photo {
-                        height: 48px;
-                        border-radius: 50%;
+                    grid-gap: 8px;
+
+                    &-1 {
+                        grid-template-columns: 1fr;
                     }
-    
-                    .speaker-text {
+
+                    &-2 {
+                        grid-template-columns: 1fr 1fr;
+                    }
+                    
+                    .speaker-container {
                         display: flex;
-                        flex-direction: column;
-                        justify-content: center;
-                        margin-left: 8px;
-                        margin-bottom: 7px;
-    
-                        .name {
-                            font-size: 1.1rem;
-                            line-height: 1.1rem;
-                            margin: 0 0 4px 0;
+                        flex-direction: row;
+
+                        .speaker-photo {
+                            height: 48px;
+                            border-radius: 50%;
                         }
-                        
-                        .position {
-                            margin: 0;
-                            font-size: 0.85rem;
-                            line-height: 0.85rem;
+        
+                        .speaker-text {
+                            display: flex;
+                            flex-direction: column;
+                            justify-content: center;
+                            margin-left: 8px;
+                            margin-bottom: 7px;
+        
+                            .name {
+                                font-size: 1.1rem;
+                                line-height: 1.1rem;
+                                margin: 0 0 4px 0;
+                            }
+                            
+                            .position {
+                                margin: 0;
+                                font-size: 0.85rem;
+                                line-height: 0.85rem;
+                            }
                         }
                     }
                 }
