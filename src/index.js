@@ -136,7 +136,7 @@ function speakerToDiv(data, doc) {
 
 function talkToDiv(talk) {
     const div = document.createElement('div');
-    div.className = 'mdc-card mdc-card--outlined mdc-card__primary-action mdc-ripple-upgraded talk ' + (talk.full ? 'full ' : ('column-' + talk.column + ' ')) + 'row-' + talk.row + ' mobile-row-' + talk.mobileRow;
+    div.className = 'mdc-card mdc-card--outlined mdc-card__primary-action mdc-ripple-upgraded talk ' + (talk.full ? 'full ' : ('column-' + talk.column + ' ')) + 'row-' + talk.row + ' mobile-row-' + talk.mobileRow + (talk.rowSpan ? ' row-end-' + (talk.row + talk.rowSpan) : '');
     div.onclick = () => openDialog(talk.speakers[0].id);
     div.innerHTML = `
             <h2 class="talk-name mdc-typography--headline2">${talk.title}</h2>
@@ -237,11 +237,10 @@ function fetchSchedule() {
             const item = doc.data();
             if (item.fullColumn) {
                 talksContainer.innerHTML +=
-                    `<div class="mdc-card mdc-card--outlined mdc-card__primary-action mdc-ripple-upgraded schedule-item row-${item.row} ${item.hideOnMobile && ' no-mobile ' || ''} ${'mobile-row-' + (item.row * 2 - 2)} full-column">
+                    `<div class="mdc-card mdc-card--outlined mdc-card__primary-action mdc-ripple-upgraded schedule-item row-${item.row} ${item.hideOnMobile && ' no-mobile ' || ''} ${'mobile-row-' + (item.mobileRow || (item.row * 2 - 2))} full-column">
                         <h2 class="item-name mdc-typography--headline2">${item.name}</h2>
                     </div>`;
             } else if (item.track) {
-                talksContainer.innerHTML +=
                     `<div class="track schedule-item row-${item.row} ${'column-' + item.column} ${item.hideOnMobile && ' no-mobile' || ''} ${'mobile-row-' + (item.row * 2 - 3 + item.column)}">
                         <h2 class="item-name mdc-typography--headline2">${item.name}</h2>
                     </div>`;

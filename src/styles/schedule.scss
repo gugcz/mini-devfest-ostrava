@@ -81,6 +81,7 @@
                     
                     .speaker-container {
                         display: flex;
+                        align-items: center;
                         flex-direction: row;
 
                         .speaker-photo {
@@ -171,6 +172,12 @@
             @for $i from 1 through 10 {
                 .row-#{$i} {
                     grid-row: $i;
+                }
+            }
+
+            @for $i from 2 through 10 {
+                .row-end-#{$i} {
+                    grid-row-end: $i;
                 }
             }
         }
