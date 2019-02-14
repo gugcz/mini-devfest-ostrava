@@ -185,9 +185,7 @@ function updateTalks() {
             talks[talk.id] = talk;
             talks[talk.id].speakers = [speaker];
         }
-        console.log(Object.values(talks).length);
     });
-    console.log(Object.values(talks));
     Object.values(talks).map(talkToDiv).forEach(it => talksContainer.appendChild(it));
 }
 
@@ -209,7 +207,6 @@ function fetchSpeakersAndTalks() {
                 }
             }).catch(error => console.log("Error getting documents: ", error));
         }))
-        .then(() => console.log('after speakers'))
         .catch(error => console.log("Error getting documents: ", error));
 }
 
