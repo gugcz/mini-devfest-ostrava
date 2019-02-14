@@ -212,17 +212,12 @@ function fetchSpeakersAndTalks() {
 
 function fetchTimes() {
     const timesContainer = document.getElementById('times-container');
-    const talksContainer = document.getElementById('talks-container');
     db.collection('times').orderBy('order')
         .get()
         .then(querySnapshot => querySnapshot.forEach(doc => {
             const data = doc.data();
             timesContainer.innerHTML += `<p class="time mdc-typography--headline4">${data.time}</p>`;
         }))
-        .then(() => {
-            timesContainer.style.gridTemplateRows = gridTemplateRows;
-            talksContainer.style.gridTemplateRows = gridTemplateRows;
-        })
         .catch(error => console.log("Error getting documents: ", error));
 }
 
