@@ -16,25 +16,6 @@ module.exports = {
         }),
         new webpack.HotModuleReplacementPlugin()
     ],
-    module: {
-        rules: [{
-            test: /\.scss$/,
-            use: ["style-loader", 
-            {
-                loader: "css-loader",
-                options: {
-                    url: false
-                }
-            }, "resolve-url-loader", {
-                loader: "sass-loader",
-                options: {
-                    includePaths: ['./node_modules'],
-                    sourceMap: true,
-                    sourceMapContents: false
-                }
-            }]
-        }]
-    },
     output: {
         filename: '[name].bundle.js',
         path: path.resolve(__dirname, '../dist')
