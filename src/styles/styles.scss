@@ -253,7 +253,10 @@ body {
         }
     }
 
-    .footer .partners-container .logos-container .logo-container{
-        margin: 32px;
+    .footer .partners-container {
+        max-width: 912px;
+        .logos-container .logo-container{
+            margin: 32px;
+        }
     }
 }
