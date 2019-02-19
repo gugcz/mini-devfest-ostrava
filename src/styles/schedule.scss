@@ -68,14 +68,7 @@
                     flex: 1;
                     align-items: flex-end;
                     grid-gap: 8px;
-
-                    &-1 {
-                        grid-template-columns: 1fr;
-                    }
-
-                    &-2 {
-                        grid-template-columns: 1fr 1fr;
-                    }
+                    grid-template-columns: 1fr;
                     
                     .speaker-container {
                         display: flex;
@@ -114,6 +107,12 @@
         .times-container {
             display: none;
         }
+    }
+}
+
+@media screen and (min-width: 500px) {
+    .schedule-section .schedule-container .talks-container .talk .speakers-container-2 {
+        grid-template-columns: 1fr 1fr;
     }
 }
 
