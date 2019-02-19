@@ -27,38 +27,47 @@
             grid-template-columns: 1fr;
             align-items: center;
             justify-items: center;
-    
-            .speaker-photo {
-                height: 200px;
-                width: 200px;
-                border-radius: 50%;
-            }
-    
-            .speaker-name {
-                margin: 16px 0 0 0;
-                font-size: 1.75rem;
-                line-height: 1.75rem;
-            }
-    
-            .speaker-position {
-                margin: 12px 0 16px 0;
-                font-size: 1.25rem;
-                line-height: 1.25rem;
-            }
-    
-            .speaker-company {
-                height: 36px;
-            }
-    
-            .speaker-about {
-                display: flex;
-                width: 100%;
-                max-width: 100%;
-    
-                .text {
-                    text-align: left;
-                    justify-content: center;
-                    overflow-wrap: break-word;
+            position: relative;
+            top: -24px;
+
+            .speaker-info {
+                display: grid;
+                grid-template-columns: 1fr;
+                align-items: center;
+                justify-items: center;
+
+                .speaker-photo {
+                    height: 200px;
+                    width: 200px;
+                    border-radius: 50%;
+                }
+        
+                .speaker-name {
+                    margin: 16px 0 0 0;
+                    font-size: 1.75rem;
+                    line-height: 1.75rem;
+                }
+        
+                .speaker-position {
+                    margin: 12px 0 16px 0;
+                    font-size: 1.25rem;
+                    line-height: 1.25rem;
+                }
+        
+                .speaker-company {
+                    height: 36px;
+                }
+        
+                .speaker-about {
+                    display: flex;
+                    width: 100%;
+                    max-width: 100%;
+        
+                    .text {
+                        text-align: left;
+                        justify-content: center;
+                        overflow-wrap: break-word;
+                    }
                 }
             }
 
@@ -107,6 +116,52 @@
                     }
                 }
             }
+
+            .co-speaker-text {
+                margin: 0 0 12px 0;
+                font-size: 1.5rem;
+                line-height: 1.5rem;
+            }
+
+            .talk-speakers-container {
+                display: flex;
+                flex-direction: column;
+
+                .speaker-container {
+                    display: flex;
+                    align-items: center;
+                    flex-direction: row;
+
+                    &:first-child {
+                        margin-bottom: 16px;
+                    }
+
+                    .speaker-photo {
+                        height: 48px;
+                        border-radius: 50%;
+                    }
+    
+                    .speaker-text {
+                        display: flex;
+                        flex-direction: column;
+                        justify-content: center;
+                        margin-left: 8px;
+                        margin-bottom: 7px;
+    
+                        .name {
+                            font-size: 1.1rem;
+                            line-height: 1.1rem;
+                            margin: 0 0 4px 0;
+                        }
+                        
+                        .position {
+                            margin: 0;
+                            font-size: 0.85rem;
+                            line-height: 0.85rem;
+                        }
+                    }
+                }
+            }
         }
     }
 }
@@ -145,6 +200,15 @@
 
             .dialog-body {
                 padding: 0 16px;
+
+                .talk-speakers-container {
+                    flex-direction: row;
+
+                    .speaker-container:first-child {
+                        margin-right: 16px;
+                        margin-bottom: 0;
+                    }
+                }
 
                 .speaker-about .text {
                     text-align: justify;

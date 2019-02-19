@@ -18,6 +18,7 @@ const db = firebase.firestore();
 const selector = '.mdc-card__primary-action, .button, .mdc-card__primary-action';
 const ripples = [].map.call(document.querySelectorAll(selector), el => new MDCRipple(el));
 const speakers = {};
+const talks = {};
 
 const iconButtonRipple = new MDCRipple(document.querySelector('.mdc-icon-button'));
 iconButtonRipple.unbounded = true;
@@ -30,7 +31,7 @@ fetchTimes();
 fetchSchedule();
 fetchPartners();
 
-function openDialog(id) {
+function openDialog(id, isTalk) {
     const dialog = new MDCDialog(document.querySelector('.mdc-dialog'));
     dialog.listen('MDCDialog:opened', () => {
         const speaker = speakers[id];
@@ -40,17 +41,50 @@ function openDialog(id) {
         const photo = document.getElementById('dialog-speaker-photo');
         const about = document.getElementById('dialog-speaker-text-about');
         const talkContainer = document.getElementById('talk-container');
+        const speakerInfoContainer = document.getElementById('speaker-info');
+        const talkSpeakerContainer = document.getElementById('talk-speakers-container');
+        const coSpeakerText = document.getElementById('co-speaker-text');
 
-        name.innerText = speaker.name;
-        position.innerHTML = speaker.position + (speaker.company ? ', ' + speaker.company : '');
-        photo.src = speaker.photoUrl;
-        if (speaker.companyLogo) {
-            companyLogo.style.display = 'block';
-            companyLogo.src = speaker.companyLogo;
+        if (isTalk) {
+            speakerInfoContainer.style.display = 'none';
+            coSpeakerText.style.display = 'none';
+            talkSpeakerContainer.innerHTML = speaker.talk.speakers.map(it => 
+            `<div class="speaker-container">
+                <img class="speaker-photo" src="${it.photoUrl}" alt="${it.name}">
+                <div class="speaker-text">
+                    <h3 class="name mdc-typography--headline3">${it.name}</h3>
+                    ${it.position && !it.company && `<h4 class="position mdc-typography--headline4">${it.position}</h4>` || ''}
+                    ${it.position && it.company && `<h4 class="position mdc-typography--headline4">${it.position}, ${it.company}</h4>` || ''}
+                </div>
+            </div>`).join('');
         } else {
-            companyLogo.style.display = 'none';
+            speakerInfoContainer.style.display = 'grid';
+            const coSpeakers = talks[speaker.talk.id].filter(it => it.name !== speaker.name);
+            if (coSpeakers.length > 0) {
+                coSpeakerText.style.display = 'inline';
+            } else {
+                coSpeakerText.style.display = 'none';
+            }
+            talkSpeakerContainer.innerHTML = coSpeakers.map(it => 
+                `<div class="speaker-container">
+                    <img class="speaker-photo" src="${it.photoUrl}" alt="${it.name}">
+                    <div class="speaker-text">
+                        <h3 class="name mdc-typography--headline3">${it.name}</h3>
+                        ${it.position && !it.company && `<h4 class="position mdc-typography--headline4">${it.position}</h4>` || ''}
+                        ${it.position && it.company && `<h4 class="position mdc-typography--headline4">${it.position}, ${it.company}</h4>` || ''}
+                    </div>
+                </div>`).join('');
+            name.innerText = speaker.name;
+            position.innerHTML = speaker.position + (speaker.company ? ', ' + speaker.company : '');
+            photo.src = speaker.photoUrl;
+            if (speaker.companyLogo) {
+                companyLogo.style.display = 'block';
+                companyLogo.src = speaker.companyLogo;
+            } else {
+                companyLogo.style.display = 'none';
+            }
+            about.innerText = speaker.about;
         }
-        about.innerText = speaker.about;
 
         if (!speaker.talk.empty) {
             talkContainer.style.display = 'block';
@@ -137,7 +171,7 @@ function speakerToDiv(data, doc) {
 function talkToDiv(talk) {
     const div = document.createElement('div');
     div.className = 'mdc-card mdc-card--outlined mdc-card__primary-action mdc-ripple-upgraded talk ' + (talk.full ? 'full ' : ('column-' + talk.column + ' ')) + 'row-' + talk.row + ' mobile-row-' + talk.mobileRow + (talk.rowSpan ? ' row-end-' + (talk.row + talk.rowSpan) : '');
-    div.onclick = () => openDialog(talk.speakers[0].id);
+    div.onclick = () => openDialog(talk.speakers[0].id, true);
     div.innerHTML = `
             <h2 class="talk-name mdc-typography--headline2">${talk.title}</h2>
             <div class="topics-container">
@@ -197,6 +231,11 @@ function fetchSpeakersAndTalks() {
             const data = doc.data();
             data.id = doc.id;
             data.talkRef.get().then(talk => {
+                if (talks[talk.id]) {
+                    talks[talk.id].push(data);
+                } else {
+                    talks[talk.id] = [data];
+                }
                 data.talk = talk.data();
                 data.talk.id = talk.id;
                 speakers[doc.id] = data;
