@@ -27,8 +27,7 @@
             grid-template-columns: 1fr;
             align-items: center;
             justify-items: center;
-            position: relative;
-            top: -24px;
+            margin-bottom: 16px;
 
             .speaker-info {
                 display: grid;
@@ -172,7 +171,7 @@
         .mdc-dialog__surface {
             min-width: 400px;
             max-width: 400px;
-            min-height: 600px;
+            min-height: 200px;
             height: unset;
             padding: 4px;
             border-radius: 4px;
@@ -193,7 +192,6 @@
         .mdc-dialog__surface {
             min-width: 500px;
             max-width: 500px;
-            min-height: 600px;
             height: unset;
             padding: 4px;
             border-radius: 4px;

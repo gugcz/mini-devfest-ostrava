@@ -20,9 +20,6 @@ const ripples = [].map.call(document.querySelectorAll(selector), el => new MDCRi
 const speakers = {};
 const talks = {};
 
-const iconButtonRipple = new MDCRipple(document.querySelector('.mdc-icon-button'));
-iconButtonRipple.unbounded = true;
-
 const scrollDownButton = document.getElementById('scroll-down');
 scrollDownButton.onclick = scrollDownToSpeakers;
 
