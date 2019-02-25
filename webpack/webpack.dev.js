@@ -7,9 +7,7 @@ module.exports = merge(common, {
     devtool: 'inline-source-map',
     devServer: {
         contentBase: path.join(__dirname, '../src'),
-        watchContentBase: true,
         hot: true,
-        inline: true
     },
     module: {
         rules: [{
