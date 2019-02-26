@@ -263,6 +263,7 @@ function fetchSchedule() {
         .get()
         .then(querySnapshot => querySnapshot.forEach(doc => {
             const item = doc.data();
+            console.log(item);
             if (item.fullColumn) {
                 talksContainer.innerHTML +=
                     `<div class="mdc-card mdc-card--outlined mdc-card__primary-action mdc-ripple-upgraded schedule-item row-${item.row} ${item.hideOnMobile && ' no-mobile ' || ''} ${'mobile-row-' + (item.mobileRow || (item.row * 2 - 2))} full-column">
