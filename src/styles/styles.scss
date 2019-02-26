@@ -231,6 +231,14 @@ body {
         .contact-container .buttons-container {
             justify-self: center;
             grid-template-columns: 320px 320px;
+
+            .become-a-partner-button {
+                justify-self: flex-end;
+            }
+
+            .code-of-conduct-button {
+                justify-self: flex-start;
+            }
         }
     }
 }
