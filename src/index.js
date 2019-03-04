@@ -183,7 +183,7 @@ function talkToDiv(talk) {
             <p class="mobile-description-text mdc-typography--body1">${talk.time} / ${talk.room}</p>
             </div>
             <div class="description">
-            <p class="description-text mdc-typography--body1">${talk.level} / ${talk.language} / ${talk.length}</p>
+            <p class="description-text mdc-typography--body1">${talk.level} / ${talk.language} / ${talk.length} / ${talk.room}</p>
             </div>
             <div class="speakers-container speakers-container-${talk.speakers.length}">
                 ${talk.speakers.map(speaker =>
