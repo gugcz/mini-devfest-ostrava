@@ -180,7 +180,7 @@ function talkToDiv(talk) {
             ).join('')}
             </div>
             <div class="mobile-description">
-            <p class="mobile-description-text mdc-typography--body1">${talk.time} / ${talk.room}</p>
+            <p class="mobile-description-text mdc-typography--body1">${talk.time}}</p>
             </div>
             <div class="description">
             <p class="description-text mdc-typography--body1">${talk.level} / ${talk.language} / ${talk.length}</p>
